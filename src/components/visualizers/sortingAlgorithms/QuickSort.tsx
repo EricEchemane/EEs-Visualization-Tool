@@ -217,18 +217,9 @@ export default function QuickSort(
 {
     ANIMATION_SPEED = 200 - speed;
     isDescending = descending;  
-    let arrayCopy = new Array(numbers.length);
-    // copy first the array, do not use 
-    // the passed array from the parameter, otherwise
-    // the bars will automatically be sorted because 
-    // React reacts to changes of the original array in the memory.
-    for (let x = 0; x < numbers.length; x++)
-        arrayCopy[x] = numbers[x];
+    mainArray = Object.assign([], numbers);
     // always clear the animations 
     animations = [];
-    // the copy to the global array
-    mainArray = arrayCopy;
-    
     // ACTUAL QUICK SORT CALL
 
     sort(0, mainArray.length - 1);

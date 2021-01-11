@@ -41,17 +41,9 @@ function animate()
 export default function MergeSort(nums: number[], speed: number, descending: boolean)
 {   
     ANIMATION_SPEED = 200 - speed;
-    let arrayCopy = new Array(nums.length);
     descend = descending;
-    // copy first first the array, do not use the passed array 
-    // from the parameter otherwise, the bars will automatically 
-    // be sorted because React reacts to changes of the array in the memory.
-    for (let x = 0; x < nums.length; x++)
-        arrayCopy[x] = nums[x];
-    // always clear the animations 
     animations = [];
-    // the copy to the global array
-    arr = arrayCopy;
+    arr = Object.assign([], nums);
     // call the actual merge Sort to push all the animations
     divide(0, arr.length - 1);
     // actual animation

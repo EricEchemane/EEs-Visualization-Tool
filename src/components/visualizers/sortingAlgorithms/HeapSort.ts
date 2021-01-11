@@ -30,9 +30,10 @@ export default function HeapSort(
 {
     ANIMATION_SPEED = 200 - animation_speed;
     isDescending = descending;
-    mainArray = new Array(numbers.length);
-    for (let x = 0; x < numbers.length; x++)
-        mainArray[x] = numbers[x];
+    mainArray = Object.assign([], numbers);
+    // mainArray = new Array(numbers.length);
+    // for (let x = 0; x < numbers.length; x++)
+    //     mainArray[x] = numbers[x];
     animations = [];
 
     // actual call of heapsort algorithm
@@ -87,6 +88,8 @@ function sort() {
     }
     for (let x = mainArray.length - 1; x > 0; x--)
     {
+        animations.push([SWAP_CHANGE, x, 0])
+        animations.push([SWAP_REVERT, x, 0])
         const temp = mainArray[0];
         mainArray[0] = mainArray[x]
         mainArray[x] = temp;
@@ -102,10 +105,16 @@ function heapify(size: number, root: number) {
     let right = (2 * root) + 2;
 
     if (left < size) {
-        if (!isDescending) {
+        // comparision
+        animations.push([CHANGE, left, root])
+        animations.push([REVERT, left, root])
 
-            if (mainArray[left] > mainArray[root]) {
-               
+        if (!isDescending) {
+            if (mainArray[left] > mainArray[root]) {    
+
+                animations.push([SWAP_CHANGE, left, root])
+                animations.push([SWAP_REVERT, left, root])
+
                 const temp = mainArray[left];
                 mainArray[left] = mainArray[root];
                 mainArray[root] = temp;
@@ -113,6 +122,9 @@ function heapify(size: number, root: number) {
         }
         else {
             if (mainArray[left] < mainArray[root]) {
+
+                animations.push([SWAP_CHANGE, left, root])
+                animations.push([SWAP_REVERT, left, root])
                
                 const temp = mainArray[left];
                 mainArray[left] = mainArray[root];
@@ -122,9 +134,15 @@ function heapify(size: number, root: number) {
             
     }
     if (right < size) {
+        // comparision
+        animations.push([CHANGE, right, root])
+        animations.push([REVERT, right, root])
         if (!isDescending) {
           
             if (mainArray[right] > mainArray[root]) {
+
+                animations.push([SWAP_CHANGE, right, root])
+                animations.push([SWAP_REVERT, right, root])
                
                 const temp = mainArray[right];
                 mainArray[right] = mainArray[root];
@@ -133,6 +151,9 @@ function heapify(size: number, root: number) {
         }
         else {
             if (mainArray[right] < mainArray[root]) {
+
+                animations.push([SWAP_CHANGE, right, root])
+                animations.push([SWAP_REVERT, right, root])
                 
                 const temp = mainArray[right];
                 mainArray[right] = mainArray[root];

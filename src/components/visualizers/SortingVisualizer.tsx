@@ -93,6 +93,13 @@ export default function SortingVisualizer (props: any) {
         } 
         else if (index === 2) {
             HeapSort(randomNumbers, sortingSpeed, descending);
+            let totalTime = ((arraySize*4)*(Math.log2(arraySize))*4)*(200 - sortingSpeed);
+            setTimeout(() => {
+                set_generateBtn_disabled(false)
+                set_arraySizeButton(false);
+                set_sortSpeed(false);
+                set_disableDescending(false);   
+            }, totalTime)
         }
     }
 
