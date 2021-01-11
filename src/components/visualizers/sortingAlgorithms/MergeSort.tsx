@@ -1,4 +1,4 @@
-import { changeColor, changeHeight, PURPLE, ACC } from './template.functions';
+import { changeColor, changeHeight, PURPLE, ACC, GREEN } from './template.functions';
 let arr = [] as number[];
 // this will be updated using the props
 let ANIMATION_SPEED = 40;

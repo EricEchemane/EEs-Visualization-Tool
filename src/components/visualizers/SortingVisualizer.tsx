@@ -61,27 +61,25 @@ export default function SortingVisualizer (props: any) {
         // check what algorithm to be use
         const index = sortingAlgoList.indexOf(chosenAlgo)           
 
-        if (index === 3) alert(index)
-        else if (index === 5) alert(index)
-        else if (index === 0) MergeSort(randomNumbers, sortingSpeed, descending);
-        else if (index === 1) QuickSort(randomNumbers, sortingSpeed);
-            
-        first = false;
-        set_sortDisabled(true);
-        set_arraySizeButton(true);
-        set_sortSpeed(true);
-        set_generateBtn_disabled(true)
-        set_disableDescending(true)
-
-        // computation for the total milliseconds it would take to sort
-        let totalTime = ((arraySize)*(Math.log2(arraySize)))*3*(200 - sortingSpeed);
-        setTimeout(() => {
-            set_generateBtn_disabled(false)
-            set_arraySizeButton(false);
-            set_sortSpeed(false);
-            set_disableDescending(false);
-      
-        }, totalTime)
+        if (index === 0) {
+            // call
+            MergeSort(randomNumbers, sortingSpeed, descending);
+            first = false;
+            set_sortDisabled(true);
+            set_arraySizeButton(true);
+            set_sortSpeed(true);
+            set_generateBtn_disabled(true)
+            set_disableDescending(true)
+            // computation for the total milliseconds it would take to sort
+            let totalTime = ((arraySize)*(Math.log2(arraySize)))*3*(200 - sortingSpeed);
+            setTimeout(() => {
+                set_generateBtn_disabled(false)
+                set_arraySizeButton(false);
+                set_sortSpeed(false);
+                set_disableDescending(false);   
+            }, totalTime)
+        } 
+        else if (index === 1) QuickSort(randomNumbers, sortingSpeed, descending);
     }
 
     function changeSpeed(n: number) {
