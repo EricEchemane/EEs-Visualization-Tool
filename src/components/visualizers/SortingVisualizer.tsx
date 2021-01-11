@@ -9,6 +9,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Algorithms
 import MergeSort from './sortingAlgorithms/MergeSort';
 import QuickSort from './sortingAlgorithms/QuickSort';
+import HeapSort from './sortingAlgorithms/HeapSort';
 
 // this indicates that the page loads for the first time
 let first = true;
@@ -60,16 +61,16 @@ export default function SortingVisualizer (props: any) {
     function sort() {
         // check what algorithm to be use
         const index = sortingAlgoList.indexOf(chosenAlgo)           
+        first = false;
+        set_sortDisabled(true);
+        set_arraySizeButton(true);
+        set_sortSpeed(true);
+        set_generateBtn_disabled(true)
+        set_disableDescending(true)
 
-        if (index === 0) {
-            // call
+        if (index === 0)
+        {
             MergeSort(randomNumbers, sortingSpeed, descending);
-            first = false;
-            set_sortDisabled(true);
-            set_arraySizeButton(true);
-            set_sortSpeed(true);
-            set_generateBtn_disabled(true)
-            set_disableDescending(true)
             // computation for the total milliseconds it would take to sort
             let totalTime = ((arraySize)*(Math.log2(arraySize)))*3*(200 - sortingSpeed);
             setTimeout(() => {
@@ -79,7 +80,17 @@ export default function SortingVisualizer (props: any) {
                 set_disableDescending(false);   
             }, totalTime)
         } 
-        else if (index === 1) QuickSort(randomNumbers, sortingSpeed, descending);
+        else if (index === 1)
+        {
+            QuickSort(randomNumbers, sortingSpeed, descending);
+            let totalTime = ((arraySize)*(Math.log2(arraySize)))*2*(200 - sortingSpeed);
+            setTimeout(() => {
+                set_generateBtn_disabled(false)
+                set_arraySizeButton(false);
+                set_sortSpeed(false);
+                set_disableDescending(false);   
+            }, totalTime)
+        } 
     }
 
     function changeSpeed(n: number) {

@@ -37,10 +37,10 @@ let isDescending = false;
 // ========================================= INDEPENDENT VARIABLES
 // this will be use for identifyig 
 // animation sequences
-let CHANGE = "change";
-let REVERT = "revert";
-let SWAP_CHANGE = "swap_change";
-let SWAP_REVERT = "swap_revert";
+const CHANGE = "change";
+const REVERT = "revert";
+const SWAP_CHANGE = "swap_change";
+const SWAP_REVERT = "swap_revert";
 
 // ==================================================== ANIMATION animate()
 function animate() {
