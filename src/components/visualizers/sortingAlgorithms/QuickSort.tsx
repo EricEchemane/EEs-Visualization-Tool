@@ -28,9 +28,7 @@ export default function QuickSort(numbers: number[], speed: number) {
     mainArray = [];
     // the copy to the global array
     mainArray = arrayCopy;
-    console.log(numbers);
-    console.log(mainArray);
-
+    
     // CALL
 }
 

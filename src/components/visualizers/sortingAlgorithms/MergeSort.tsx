@@ -1,37 +1,10 @@
+import { changeColor, changeHeight, PURPLE, ACC } from './template.functions';
 let arr = [] as number[];
 // this will be updated using the props
 let ANIMATION_SPEED = 40;
 let descend = false;
-//  color variables
-const GREEN = "yellowgreen";
-const PURPLE = "purple";
-const RED = "#dd6f74";
-const ACC = "#0AFFEF";
-const GREY = "rgba(255,255,255,.4)";
-
 // containers of Animation Sequence
 let animations = [] as any;
-
-// ======================== HELPERS =======================
-
-// ======================== CHANGE COLOR =======================
-function changeColor(index: number, COLOR: string)
-{
-    // actual array bars on the screen
-    const bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
-    if (bars[index]) {
-        bars[index].style.transition = '0ms';
-        bars[index].style.backgroundColor = COLOR;
-    } 
-}
-// ======================== CHANGE HEIGHT =======================
-function changeHeight(index: number, HEIGHT: number)
-{
-    // actual array bars on the screen
-    const bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
-    if (bars[index]) bars[index].style.height = HEIGHT+"px";
-}
-
 // The function below is where the animation happens
 // the sequence divided for every triplet
 // the first of the triplet is when the values are being compared thus changing its color
@@ -48,7 +21,6 @@ function animate()
         // example 2: if x = 1 then x % 3 = 0 and not 2 then revert the original color.
         // example 3: if x = 2 then x % 3 = 2 then change the size;
         const isColorChange = x % 3 !== 2;
-        
         if (isColorChange) {
             const color = x % 3 === 0 ? PURPLE : ACC;
             setTimeout(() => {
@@ -56,7 +28,6 @@ function animate()
                 changeColor(animations[x][1], color);
 
             }, x * ANIMATION_SPEED);
-
         }
         // else change the height
         else {
@@ -92,9 +63,7 @@ function divide(left: number, right: number)
 {
     if (left >= right)
         return;
-    
     const mid = Math.floor((right + left) / 2)
-
     // left half
     divide(left, mid)
     // right helf
@@ -107,21 +76,17 @@ function merge(left: number, mid: number, right: number)
 {
     const leftsize = mid - left + 1;
     const rightsize = right - mid;
-
     const leftsub = arr.slice(left, mid + 1);
     const rightsub = arr.slice(mid + 1);
-
     let i = 0;
     let j = 0;
     let k = left;
-
     while (i < leftsize && j < rightsize)
     {   
         // push two animations for color changes
         animations.push([left + i, right + j]);
         // push the second time to revert the color
         animations.push([left + i, right + j]);
-
         if (descend) {
             if (leftsub[i] > rightsub[j])
             {
@@ -139,7 +104,6 @@ function merge(left: number, mid: number, right: number)
             } 
             continue;
         }
-        
         if (leftsub[i] < rightsub[j])
         {
             // push the Height changes
@@ -155,7 +119,6 @@ function merge(left: number, mid: number, right: number)
             j++; k++;
         }
     }
-
     while (i < leftsize)
     {
         // here we should push a TRIPLET to maintain the ratio of the animatino sequence
