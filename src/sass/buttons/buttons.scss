@@ -1,0 +1,110 @@
+button {
+    all: unset;
+    position: relative; 
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    margin: 1rem;
+    // font-weight: bold;
+    color: $f-color1;
+    white-space: nowrap;
+}
+
+button:hover {
+    background: $gradient-concave;
+    box-shadow: $small;
+}
+
+button:active {
+    background: $gradient-convex;
+    box-shadow: $small;
+}
+
+button.btn {
+    display: inline-block;
+    width: auto;
+    // height: auto;
+    padding: 0 1rem;
+    border-radius: 30px;
+}
+
+@mixin default ($bg) {
+    color: $b-prime;
+    position: relative;
+    transform: scale(.9);
+    &::before {
+        content: ' ';
+        position: absolute;
+        top: -10px;
+        left: -12px;
+        bottom: -10px;
+        right: -12px;
+        background-color: transparent;
+        border-radius: 30px;
+        box-shadow: inset 3px 3px 6px rgba(0,0,0,.7), 
+                    inset -3px -3px 6px rgba(255,255,255,.2);
+    }
+    &:hover {
+        background: $bg;
+        box-shadow: $small;
+    }
+    &:active {
+        box-shadow: $small-inset;
+    }
+}
+
+button.accent {
+    @include default($b-accent);
+}
+button.error {
+    @include default($b-error);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: .5;
+}
+.text-btn:active {
+    text-shadow:  0 0 5px $b-accent;
+}
+.text-btn:hover {
+    box-shadow: none;
+    background: none;
+    color: $b-accent;
+}
+button.btn-round {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+@mixin ToggleButton ($afterBG, $left) {
+    display: inline-block;
+    margin: .5rem;
+    cursor: pointer;
+    position: relative;
+    transition: .1s ease-in-out;
+    &::before {
+        content: ' ';
+        transition: .1s ease-in-out;
+        display: block;
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: $left;
+        border-radius: 50%;
+        background-color: $afterBG;
+        border: 7px solid $b-prime;
+        box-shadow: 2px 0 5px 3px rgba(0,0,0,.5);
+    }
+}
+
+.toggle-btn {
+    @include ToggleButton(rgba(255,255,255,.2), 0);
+}
+.toggle-btn-on {
+    @include ToggleButton(transparent, 51%);
+}

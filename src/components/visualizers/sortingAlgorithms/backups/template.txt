@@ -1,0 +1,47 @@
+// actual array bars on the screen
+let bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
+let mainArray = [] as number[];
+// this will be updated using the props
+let ANIMATION_SPEED = 40;
+//  color variables
+const ACC = "#0AFFEF";
+const RED = "#dd6f74";
+const GREY = "rgba(255,255,255,.4)";
+// containers of Animation Sequence
+let animations = [] as any;
+
+// =================== ENTRY POINT ====================
+export default function QuickSort(numbers: number[], speed: number) {
+    ANIMATION_SPEED = 200 - speed;
+    let arrayCopy = new Array(numbers.length);
+    // copy first the array, do not use 
+    // the passed array from the parameter, otherwise
+    // the bars will automatically be sorted because 
+    // React reacts to changes of the original array in the memory.
+    for (let x = 0; x < numbers.length; x++)
+        arrayCopy[x] = numbers[x];
+    // the copy to the global array
+    mainArray = arrayCopy;
+    console.log(numbers);
+    console.log(mainArray);
+
+    // CALL
+}
+
+// ================= ANIMATE ====================
+function animate()
+{
+
+}
+// ================= CHANGE COLOR =================
+function changeColor(index: number, COLOR: string)
+{
+    if (bars[index]) {
+        bars[index].style.transition = '0ms';
+        bars[index].style.backgroundColor = COLOR;
+    } 
+}
+// ================= CHANGE HEIGHT =================
+function changeHeight(index: number, HEIGHT: number) {
+    if (bars[index]) bars[index].style.height = HEIGHT+"px";
+}

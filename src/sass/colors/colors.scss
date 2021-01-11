@@ -1,0 +1,32 @@
+// background colors
+$b-prime: #243441;
+$b-accent: #0AFFEF;
+$b-error: #dd6f74;
+
+// foreground colors
+$f-color1: #ffffff;
+$f-color2: rgba(255,255,255,.4);
+
+.f-color1 {
+    color: $f-color1;
+}
+.f-color2 {
+    color: $f-color2;
+}
+.b-prime {
+    color: $b-prime;
+}
+.b-accent {
+    color: $b-accent;
+}
+.b-error {
+    color: $b-error;
+}
+
+.accent {
+    background-color: $b-accent;
+}
+
+.error {
+    background-color: $b-error;
+}

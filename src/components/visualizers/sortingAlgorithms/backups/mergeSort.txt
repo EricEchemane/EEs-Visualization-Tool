@@ -1,0 +1,145 @@
+let arr = [] as number[];
+let ANIMATION_SPEED = 40;
+const ACC = "#0AFFEF"
+// const RED = "yellow"
+const RED = "#dd6f74"
+const ORA = "orange"
+
+let animations = [] as any;
+
+// ================ HELPERS =======================
+const bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
+
+function changeColor(index: number, COLOR: string)
+{
+    // const bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
+    if (bars[index]) {
+        bars[index].style.transition = '0ms';
+        bars[index].style.backgroundColor = COLOR;
+    } 
+}
+
+function changeHeight(index: number, HEIGHT: number)
+{
+    
+    if (bars[index]) bars[index].style.height = HEIGHT+"px";
+}
+
+function animate() {
+    // const bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
+    for (let x = 0; x < animations.length; x++) {
+
+        const isColorChange = x % 3 !== 2;
+        
+        if (isColorChange) {
+            const color = x % 3 === 0 ? RED : ACC;
+
+            setTimeout(() => {
+                changeColor(animations[x][0], color);
+                changeColor(animations[x][1], color);
+            }, x * ANIMATION_SPEED);
+        } else {
+            setTimeout(() => {
+                changeHeight(animations[x][0], animations[x][1]);
+                // changeColor(animations[x][0], "yellowOrange");
+            }, x * ANIMATION_SPEED);
+        }
+        
+    }
+}
+
+// ===========================================
+
+export default function MergeSort(nums: number[], speed: number)
+{   
+    ANIMATION_SPEED = 200 - speed;
+    let arrayCopy = new Array(nums.length);
+
+    for (let x = 0; x < nums.length; x++)
+        arrayCopy[x] = nums[x];
+
+    arr = arrayCopy;
+    console.log(arr);
+    divide(0, arr.length - 1);
+
+    for (let y = 0; y < arr.length; y++) {
+        changeColor(y, "rgba(255,255,255,.4)");
+    }
+    animate();
+    // console.log(arr);
+}
+
+function divide(left: number, right: number)
+{
+    if (left >= right)
+        return;
+    
+    const mid = Math.floor((right + left) / 2)
+
+    // console.log(left, mid);
+    divide(left, mid)
+    // console.log(mid + 1, right);
+    divide(mid + 1, right)
+
+    merge(left, mid, right);
+}
+
+function merge(left: number, mid: number, right: number)
+{
+    const leftsize = mid - left + 1;
+    const rightsize = right - mid;
+
+    const leftsub = arr.slice(left, mid + 1);
+    const rightsub = arr.slice(mid + 1);
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+
+    while (i < leftsize && j < rightsize)
+    {   
+        // push comparison animations.push(left + i, right + j)
+        // push comparison animations.push(left + i, right + j)
+        animations.push([left + i, right + j]);
+        animations.push([left + i, right + j]);
+        
+        if (leftsub[i] < rightsub[j])
+        {
+            // animations.push(left + i, leftsub[i]);
+            animations.push([k, leftsub[i]]);
+
+            arr[k] = leftsub[i];
+            i++; k++;
+        }
+        else
+        {   
+            // animations.push(left + i, leftsub[i]);
+            animations.push([k , rightsub[j]]);
+            arr[k] = rightsub[j];
+            j++; k++;
+        }
+        // console.log(left+i, right+j);
+    }
+
+    while (i < leftsize)
+    {
+        animations.push([left + i, left + i]);
+        animations.push([left + i, left + i]);
+        animations.push([k, leftsub[i]]);
+
+        arr[k] = leftsub[i];
+        i++;
+        k++;
+    }
+
+    while (j < rightsize)
+    {
+        animations.push([right + j, right + j]);
+        animations.push([right + j, right + j]);
+        animations.push([k, rightsub[j]]);
+
+        arr[k] = rightsub[j];
+        j++;
+        k++;
+    }
+}

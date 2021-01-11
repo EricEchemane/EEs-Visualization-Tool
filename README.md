@@ -1,46 +1,118 @@
-# Getting Started with Create React App
+# Dark Neumorphic React Components by Eric Echemane
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## STYLE
+I used `SASS` for the styling of the components.
 
-## Available Scripts
+### Major variables in SASS for the theme
+This variables will help you in styling the components through props.
 
-In the project directory, you can run:
+For the Background Color
+- `$b-prime`  : dark blue (#243441)
+- `$b-accent` : close to cyan (#0AFFEF)
+- `$b-error`  : close to crimson (#FF555D)
 
-### `npm start`
+For the foreground Color
+- `$f-color1` : main text color (#FFFFFF)
+- `$f-color2` : just white but 40% transparent rgba(255,255,255,.4)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Classes
+There are a lot of classes that you will see as a prop's value on the following APIs that styles the components. You can check that in `sass folder` or `main.css`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Components API
+The following APIs will show you how to style the components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Buttons
+*By default*, all button components have the following properties
+|    props    | default value | other values | required |
+|-------------|---------------|--------------|----------|
+| label       | null          | any string   | yes      |
+| disable     | false         | boolean      | not      |
+| title       | null          | any string   | not      |
+| handleClick | null          | any function | yes      | 
+| id          | null          | any string   | yes      | 
 
-### `npm run build`
+`<Button />` and `<ButtonText />`
+props : default 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`<ButtonAccent />`
+props : default plus additional below
+| props       | default value | other values      | required |
+|-------------|---------------|-------------------|----------|
+| type        | null          | "accent", "error" | yes      |
+if the `type` is not specified the background color of the button will be `b-prime`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`<ButtonWithIcon />`
+props : default plus additional below
+| props       | default value | other values             | required |
+|-------------|---------------|--------------------------|----------|
+| icon        | null          | any react Icon component | yes      |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`<IconButton />`
+props : default plus additional below
+| props       | default value | other values             | required |
+|-------------|---------------|--------------------------|----------|
+| color       | "white"       | "b-accent", "b-error"    | yes      |
 
-### `npm run eject`
+`<RoundButton />`
+props : default plus additional below
+| props       | default value | other values             | required |
+|-------------|---------------|--------------------------|----------|
+| color       | null          | "accent", "error"        | not      |
+| icon        | null          | any react Icon component | yes      |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`<ToggleButton />`
+| props       | default value | other values      | required |
+|-------------|---------------|-------------------|----------|
+| title       | null          | any string        | not      |
+| color       | null          | "accent", "error" | yes      |
+| id          | null          | any string        | yes      | 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Inputs 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`<Slider />`
+| props       | default value | other values      | required |
+|-------------|---------------|-------------------|----------|
+| title       | null          | any string        | not      |
+| color       | null          | "accent", "error" | yes      |
+| id          | null          | any string        | yes      |
+| min         | null          | positive integer  | yes      |
+| max         | null          | positive integer  | yes      |
+| disable     | false         | boolean           | not      |
+| onInput     | null          | function          | yes      |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+*Notes:* 
+- `max` props is always synced to the width of the input in pixels. Example: if `max={300}` then the width of the actual range input is `300px`.
+- `id` should be unique among all elements in the DOM, otherwise the app might break.
+- `onInput` is require. If you dont provide the function, the application might break.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`<TextInput />`
+| props       | default value | other values         | required |
+|-------------|---------------|----------------------|----------|
+| id          | null          | any string           | yes      |
+| disable     | false         | boolean              | not      |
+| placeHolder | null          | any string           | yes      |
+| type        | null          | "text" or "password" | yes      | 
+| error       | false         | boolean              | not      |
+| fullWidth   | false         | boolean              | not      |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`<Radio />`
+| props       | default value | other values         | required |
+|-------------|---------------|----------------------|----------|
+| checked     | false         | boolean              | not      |
+| disabled    | false         | boolean              | not      |
+| color       | "accent"      | "error"              | not      |
+| name        | null          | string               | yes      |
+| value       | null          | string or number     | yes      |
+| label       | null          | string               | yes      |
+
+`<CheckBox />`
+| props       | default value | other values         | required |
+|-------------|---------------|----------------------|----------|
+| checked     | false         | boolean              | not      |
+| disabled    | false         | boolean              | not      |
+| color       | "accent"      | "error"              | not      |
+| value       | null          | string or number     | yes      |
+| id          | null          | string               | yes      |
+| label       | null          | string               | yes      |

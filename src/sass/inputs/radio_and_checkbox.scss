@@ -1,0 +1,73 @@
+
+.radio-input {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: $f-color1;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.radio-btn input {
+    opacity: 0;
+}
+
+.radio-btn {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $f-color2;
+    border-radius: 50%;
+    position: relative;
+}
+.radio-btn .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // background-color: rgba(0,0,0,.4);
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border-radius: 50%;
+    opacity: .1;
+}
+
+.radio-btn input:checked + .checkmark{
+    opacity: 1;
+}
+
+
+.checkbox {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: $f-color1;
+    cursor: pointer;
+    padding: .5rem;
+}
+
+.checkbox-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid $f-color2;
+    position: relative;
+}
+.checkbox-btn input {
+    opacity: 0;
+}
+
+.checkbox-btn input:checked + .checkbox-mark {
+    opacity: 1;
+}
+
+.checkbox-mark {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: $thin-inset;
+    opacity: .4;
+}
