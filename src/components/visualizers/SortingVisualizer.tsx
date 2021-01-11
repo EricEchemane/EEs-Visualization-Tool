@@ -91,6 +91,9 @@ export default function SortingVisualizer (props: any) {
                 set_disableDescending(false);   
             }, totalTime)
         } 
+        else if (index === 2) {
+            HeapSort(randomNumbers, sortingSpeed, descending);
+        }
     }
 
     function changeSpeed(n: number) {
