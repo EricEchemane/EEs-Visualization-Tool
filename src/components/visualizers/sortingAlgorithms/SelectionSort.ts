@@ -62,10 +62,88 @@ export default function SelectionSort(
     nums: number[],
     speed: number,
     descending: boolean,
-    callback: Function) {
+    callback: Function)
+{
     mainArray = new Array(nums.length)
     mainArray = Object.assign([], nums)
 
     ANIMATION_SPEED = 200 - speed;
     animations = [];
+
+    // act ual algo
+    let size = mainArray.length
+    var i: number, j: number, min_idx: number;
+
+    for (i = 0; i < size - 1; i++)
+    {
+        min_idx = i;
+
+        for (j = i + 1; j < size; j++) {
+            
+            animations.push([CHANGE, j, min_idx])
+            animations.push([REVERT, j, min_idx])
+            if (descending) {
+                if (mainArray[j] > mainArray[min_idx]) min_idx = j;
+            }
+            else {
+                if (mainArray[j] < mainArray[min_idx]) min_idx = j;
+            }
+        }
+        animations.push([SWAP_CHANGE, i, min_idx])
+        animations.push([SWAP_REVERT, i, min_idx])
+
+        const temp = mainArray[min_idx]
+        mainArray[min_idx] = mainArray[i]
+        mainArray[i] = temp;
+    }
+    // animations start
+    animate();
+    callback(animations.length)    
+}
+
+export function BubbleSort(
+    nums: number[],
+    speed: number,
+    descending: boolean,
+    callback: Function)
+{
+    mainArray = new Array(nums.length)
+    mainArray = Object.assign([], nums)
+
+    ANIMATION_SPEED = 200 - speed;
+    animations = [];
+
+    // act ual algo
+    let size = mainArray.length
+
+    for (let i = 0; i < size - 1; i++)
+    {
+        for (let j = i + 1; j < size; j++) {
+
+            animations.push([CHANGE, i, j])
+            animations.push([REVERT, i, j])
+
+            if (!descending) {
+                if (mainArray[i] > mainArray[j]) {
+                    animations.push([SWAP_CHANGE, i, j])        
+                    animations.push([SWAP_REVERT, i, j])  
+                    const temp = mainArray[i]      
+                    mainArray[i] = mainArray[j]
+                    mainArray[j] = temp;
+                }
+            }
+            else {
+                if (mainArray[i] < mainArray[j]) {
+                    animations.push([SWAP_CHANGE, i, j])        
+                    animations.push([SWAP_REVERT, i, j])   
+                    const temp = mainArray[i]     
+                    mainArray[i] = mainArray[j]
+                    mainArray[j] = temp;
+                }
+            }
+        }
+    }
+    // animations start
+    animate();
+    callback(animations.length)    
 }

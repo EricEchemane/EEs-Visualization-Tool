@@ -11,6 +11,9 @@ import MergeSort from './sortingAlgorithms/MergeSort';
 import QuickSort from './sortingAlgorithms/QuickSort';
 import HeapSort from './sortingAlgorithms/HeapSort';
 import ShellSort from './sortingAlgorithms/ShellSort';
+import InsertionSort from './sortingAlgorithms/InsertionSort';
+import SelectionSort from './sortingAlgorithms/SelectionSort';
+import {BubbleSort} from './sortingAlgorithms/SelectionSort';
 
 // this indicates that the page loads for the first time
 let first = true;
@@ -73,6 +76,9 @@ export default function SortingVisualizer (props: any) {
         else if (index === 1) QuickSort(randomNumbers, sortingSpeed, descending, enablePanels)
         else if (index === 2) HeapSort(randomNumbers, sortingSpeed, descending, enablePanels);
         else if (index === 3) ShellSort(randomNumbers, sortingSpeed, descending, enablePanels);
+        else if (index === 4) InsertionSort(randomNumbers, sortingSpeed, descending, enablePanels);
+        else if (index === 5) SelectionSort(randomNumbers, sortingSpeed, descending, enablePanels);
+        else if (index === 6) BubbleSort(randomNumbers, sortingSpeed, descending, enablePanels);
     }
 
     function enablePanels(t: number) {
