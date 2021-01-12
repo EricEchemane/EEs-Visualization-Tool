@@ -2,9 +2,9 @@ export default function Slider(props: any)
 {   
     function handleInput(e: any) {
         const value = e.target.value;
-        let progressBar = document.getElementById(props.id);        
-        if(progressBar) {
-            progressBar.style.width = (value/2) + "px";
+        let prog = document.getElementById(props.id);        
+        if(prog) {
+            prog.style.width = (value/2) + "px";
         }
         props.onInput(value);
     }
@@ -30,7 +30,7 @@ export default function Slider(props: any)
                     step='1'
                     style={{width: (props.max/2) + "px"}}
                     />
-                <div className={"slider-progress-" + props.color} id={props.id} ></div>
+                <div className={"slider-progress-" + props.color} id={props.id}></div>
         </div>  
     )
 }

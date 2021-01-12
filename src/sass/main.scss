@@ -22,26 +22,6 @@
     font-family: 'Poppins', sans-serif;
     // transition: 150ms ease-out;
 }
-// scroll bar
-/* width */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(0,0,0,.2); 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.1); 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
 
 a {
     text-decoration: none;
@@ -54,7 +34,7 @@ input {
 
 body {
     transition: none;
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -186,13 +166,12 @@ h1,h2,h3,h4,h5,h6{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
     z-index: 10;
-    box-shadow: 0 0 100px rgba(0,0,0,.7);
-    border-radius: 20px;
     padding: 2rem;
     color: $f-color1;
+    overflow: hidden;
 }
 
 .window-container {
@@ -202,16 +181,56 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 10px;
     overflow-y: scroll;
     padding: 1rem;
+    
+    // scroll bar
+    /* width */
+    &::-webkit-scrollbar {
+    width: 5px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,.2); 
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.1); 
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    }
 }
 
 .comparison-panel {
     width: 100%;
-    height: 25%;
-    background-color: rgba(0,0,0,.1);
+    height: 20%;
     border-radius: 10px;
     position: relative;
-    top: 1rem;
+    top: .5rem;
     overflow: hidden;
+        // scroll bar
+    /* width */
+    &::-webkit-scrollbar {
+    height: 3px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+    background: rgba(0,0,0,.2); 
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.1); 
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    }
 }
 
 .windows {
@@ -243,8 +262,39 @@ h1,h2,h3,h4,h5,h6{
     left: 1rem;
 }
 
+.panel {
+    display: flex;
+    width: 1000px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.add-options {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+    // background-color: rgba(0,0,0,.2);
+    padding: 1rem;
+}
+.compare-options {
+    cursor: pointer;
+    width: 200px;
+}
+.compare-options:hover {
+    background-color: rgba(0,0,0,.2);
+}
 
 @media screen and (max-width: 700px) {
+    body {
+        overflow-y: scroll;
+    }
+    .panel {
+        justify-content: flex-start;
+    }
     .window-container {
         overflow-y: scroll;
     }
@@ -263,7 +313,6 @@ h1,h2,h3,h4,h5,h6{
         flex-wrap: nowrap;
         width: 100%;
         overflow-x: scroll;
-        
     }
     .bars {
         width: 3px;

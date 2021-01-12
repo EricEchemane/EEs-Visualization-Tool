@@ -19,10 +19,6 @@ function App() {
     return (
         <Box>
             <AppBar handleChangeTab={changeTab} />
-            
-            <Box hidden={comparisonApp} >
-                <CompareSortingAlgo />s
-            </Box>
 
            <Box
                 hidden={currentOpenTab !== 0}
@@ -43,7 +39,11 @@ function App() {
                 mt={3}
                 className="f-color1" >
 
-                    Path Finder
+                Path Finder
+            </Box>
+            
+            <Box hidden={comparisonApp} >
+                <CompareSortingAlgo />s
             </Box>
         </Box>
     );  
