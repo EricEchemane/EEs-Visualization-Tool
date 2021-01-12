@@ -1,4 +1,4 @@
-import { changeColor, changeHeight, PURPLE, ACC, GREEN } from './template.functions';
+import { changeColor, changeHeight, PURPLE, ACC } from './template.functions';
 let arr = [] as number[];
 // this will be updated using the props
 let ANIMATION_SPEED = 40;
@@ -38,7 +38,7 @@ function animate()
     }
 }
 // ======================== entry point =======================
-export default function MergeSort(nums: number[], speed: number, descending: boolean)
+export default function MergeSort(nums: number[], speed: number, descending: boolean, callback: Function)
 {   
     ANIMATION_SPEED = 200 - speed;
     descend = descending;
@@ -48,6 +48,7 @@ export default function MergeSort(nums: number[], speed: number, descending: boo
     divide(0, arr.length - 1);
     // actual animation
     animate();
+    callback(animations.length)
 }
 
 // ====================== MERGE SORT DIVIDE ============================

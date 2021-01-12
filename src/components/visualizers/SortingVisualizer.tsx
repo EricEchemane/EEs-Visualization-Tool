@@ -68,39 +68,18 @@ export default function SortingVisualizer (props: any) {
         set_generateBtn_disabled(true)
         set_disableDescending(true)
 
-        if (index === 0)
-        {
-            MergeSort(randomNumbers, sortingSpeed, descending);
-            // computation for the total milliseconds it would take to sort
-            let totalTime = ((arraySize)*(Math.log2(arraySize)))*3*(200 - sortingSpeed);
-            setTimeout(() => {
-                set_generateBtn_disabled(false)
-                set_arraySizeButton(false);
-                set_sortSpeed(false);
-                set_disableDescending(false);   
-            }, totalTime)
-        } 
-        else if (index === 1)
-        {
-            QuickSort(randomNumbers, sortingSpeed, descending);
-            let totalTime = ((arraySize)*(Math.log2(arraySize)))*2*(200 - sortingSpeed);
-            setTimeout(() => {
-                set_generateBtn_disabled(false)
-                set_arraySizeButton(false);
-                set_sortSpeed(false);
-                set_disableDescending(false);   
-            }, totalTime)
-        } 
-        else if (index === 2) {
-            HeapSort(randomNumbers, sortingSpeed, descending);
-            let totalTime = ((arraySize*4)*(Math.log2(arraySize))*4)*(200 - sortingSpeed);
-            setTimeout(() => {
-                set_generateBtn_disabled(false)
-                set_arraySizeButton(false);
-                set_sortSpeed(false);
-                set_disableDescending(false);   
-            }, totalTime)
-        }
+        if (index === 0) MergeSort(randomNumbers, sortingSpeed, descending, enablePanels);
+        else if (index === 1) QuickSort(randomNumbers, sortingSpeed, descending, enablePanels)
+        else if (index === 2) HeapSort(randomNumbers, sortingSpeed, descending, enablePanels);
+    }
+
+    function enablePanels(t: number) {
+        setTimeout(() => {
+            set_generateBtn_disabled(false)
+            set_arraySizeButton(false);
+            set_sortSpeed(false);
+            set_disableDescending(false);   
+        }, t * (200 - sortingSpeed))
     }
 
     function changeSpeed(n: number) {

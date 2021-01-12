@@ -25,25 +25,24 @@ const SWAP_REVERT = "swap_revert";
 export default function HeapSort(
     numbers: number[],
     animation_speed: number,
-    descending: boolean
+    descending: boolean,
+    callback: Function
 )
 {
     ANIMATION_SPEED = 200 - animation_speed;
     isDescending = descending;
     mainArray = Object.assign([], numbers);
-    // mainArray = new Array(numbers.length);
-    // for (let x = 0; x < numbers.length; x++)
-    //     mainArray[x] = numbers[x];
     animations = [];
-
     // actual call of heapsort algorithm
     sort();
     // animate
     animate();
+    callback(animations.length)
 }
 
 // ======================================== animation 
 function animate() {
+    
     for (let x = 0; x < animations.length; x++) {
         const STATE = animations[x][0];
         const VALUE_1 = animations[x][1];
