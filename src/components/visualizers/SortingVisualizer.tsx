@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {Box} from '@material-ui/core';
 import Button from '../../components/buttons/Button';
 import ButtonAccent from '../../components/buttons/ButtonAccent';
+import ButtonText from '../../components/buttons/ButtonText';
 import ToggleButton from '../../components/buttons/ToggleButton';
 import Slider from '../../components/inputs/slider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -18,7 +19,7 @@ import {BubbleSort} from './sortingAlgorithms/SelectionSort';
 // this indicates that the page loads for the first time
 let first = true;
 
-export default function SortingVisualizer (props: any) {
+export default function SortingVisualizer (props: any): JSX.Element {
 
     const [algoOptionsOpen,set_algoOptionsOpen] = useState(false);
     const [chosenAlgo , set_chosenAlgo] = useState("Choose an algorithm");
@@ -33,6 +34,9 @@ export default function SortingVisualizer (props: any) {
         "Merge Sort", "Quick Sort", "Heap Sort", "Shell Sort","Insertion Sort", 
         "Selection Sort","Bubble Sort"
     ];
+
+    const [compareWindowHidden, set_CompareWindow] = useState(true);
+    const [compareButtonDisabled, set_compareButtonDisabled] = useState(false);
     
     const [arraySize, set_arraySize] = useState(150)
 
@@ -100,12 +104,12 @@ export default function SortingVisualizer (props: any) {
             className="flat"
             style={{width: '98vw', height: '80vh', position: 'relative', 
             margin: 'auto', top: '1rem', overflow: 'hidden',
-            borderRadius: '10px'}}>
+                borderRadius: '10px'
+            }}>
+            
 
-            <div id="sorting-windows">
-
-                <div className="bars-container" >
-
+            <Box id="sorting-windows">
+                <div className="bars-container">
                     <div className="algo-options">
                         <Box className={"sorting-algorithms"} hidden={!algoOptionsOpen} >
                             <div style={{pointerEvents: 'none'}} > <Box p={2} pl={1}>  </Box> </div>
@@ -129,7 +133,8 @@ export default function SortingVisualizer (props: any) {
                         )
                     }
                 </div>
-            </div>
+                
+            </Box>
 
             <div id="scroll" >
 
@@ -144,28 +149,31 @@ export default function SortingVisualizer (props: any) {
                         }} />
                 </Box>
 
-                <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
-                    <Box pb={1} textAlign="center" > Change Array Size </Box>
-                    <Slider disabled={arraySizeButton} id="array_size" onInput={(n:any)=>changeArraySize(n)} color="accent" min={5} max={300} value={arraySize} />
-                </Box>
-                <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
-                    <Box pb={1} textAlign="center" > Change Speed </Box>
-                    <Slider disabled={sortSpeed} id="sorting-speed" onInput={(n:any)=>changeSpeed(n)} color="error" min={5} max={198} value={sortingSpeed} />
-                </Box>
-                <Box m={2} style={{position: 'relative', bottom: '2px'}} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
-                    <Box pb={1} textAlign="center" > Descending </Box>
-                        <ToggleButton disabled={disableDescending} toggleOn={descending} color="accent" title="Descending" handleClick={() => {
-                            set_descending(!descending);
-                            if (!first) {
-                                set_sortDisabled(false)   
-                                first = false;
-                            }
-                        }} />
-                </Box>
+                    <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+                        <Box pb={1} textAlign="center" > Change Array Size </Box>
+                        <Slider disabled={arraySizeButton} id="array_size" onInput={(n:any)=>changeArraySize(n)} color="accent" min={5} max={300} value={arraySize} />
+                    </Box>
+                    <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+                        <Box pb={1} textAlign="center" > Change Speed </Box>
+                        <Slider disabled={sortSpeed} id="sorting-speed" onInput={(n:any)=>changeSpeed(n)} color="error" min={5} max={198} value={sortingSpeed} />
+                    </Box>
+                    <Box m={2} style={{position: 'relative', bottom: '2px'}} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+                        <Box pb={1} textAlign="center" > Descending </Box>
+                            <ToggleButton disabled={disableDescending} toggleOn={descending} color="accent" title="Descending" handleClick={() => {
+                                set_descending(!descending);
+                                if (!first) {
+                                    set_sortDisabled(false)   
+                                    first = false;
+                                }
+                            }} />
+                    </Box>
 
-                <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
-                    <ButtonAccent label="Sort !" disabled={sortDisabled} handleClick={sort} title="Start sorting" type="error" />
-                </Box>
+                    <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+                        <ButtonAccent label="Sort !" disabled={sortDisabled} handleClick={sort} title="Start sorting" type="error" />
+                    </Box>
+                    <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
+                        <ButtonText label="Compare algorithms" disabled={compareButtonDisabled} handleClick={props.showComparisonApp} title="Compare Algorithms" />
+                    </Box>
                 </Box>
             </div>
         </Box>

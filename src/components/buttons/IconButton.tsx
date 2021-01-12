@@ -1,8 +1,6 @@
-import {useState} from 'react';
 
 export default function IconButton(props: any)
 {
-    const [disabled, set_disabled] = useState(props.disable);
 
     return (
         <button 
@@ -10,8 +8,8 @@ export default function IconButton(props: any)
             className={"rec flat " + props.color } 
             onClick={props.handleClick}
             id={props.id}
-            style={{opacity: disabled ? '.4' : '1', 
-                    pointerEvents: disabled ? 'none':'visible'}}>
+            style={{opacity: props.disabled ? '.4' : '1', 
+                    pointerEvents: props.disabled ? 'none':'visible'}}>
 
                 <props.icon 
                     fontSize="large" 

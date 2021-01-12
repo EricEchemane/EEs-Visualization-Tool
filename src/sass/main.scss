@@ -22,6 +22,27 @@
     font-family: 'Poppins', sans-serif;
     // transition: 150ms ease-out;
 }
+// scroll bar
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.2); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.1); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 a {
     text-decoration: none;
     color: $f-color1;
@@ -100,7 +121,6 @@ h1,h2,h3,h4,h5,h6{
     width: 90%;
     height: 370px;
     display: flex;
-    // justify-content: space-evenly;
     align-items: flex-end;
     margin: auto;
     // border: 1px solid white;
@@ -160,7 +180,77 @@ h1,h2,h3,h4,h5,h6{
     justify-content: center;
 }
 
+
+#comparison-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 90vh;
+    z-index: 10;
+    box-shadow: 0 0 100px rgba(0,0,0,.7);
+    border-radius: 20px;
+    padding: 2rem;
+    color: $f-color1;
+}
+
+.window-container {
+    width: 100%;
+    height: 75%;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 10px;
+    overflow-y: scroll;
+    padding: 1rem;
+}
+
+.comparison-panel {
+    width: 100%;
+    height: 25%;
+    background-color: rgba(0,0,0,.1);
+    border-radius: 10px;
+    position: relative;
+    top: 1rem;
+    overflow: hidden;
+}
+
+.windows {
+    height: 200px;
+    padding: 1rem;
+    background-color: transparent;
+}
+
+.bars-comparison-container {
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    position: relative;
+    border: 1px solid $f-color2;
+}
+
+.bars0,.bars1,.bars2,.bars3,.bars4,.bars5,.bars6, .barsX {
+    flex: 2 1 auto;
+    margin: 1px;
+    background-color: $b-accent;
+    transition: .2s ease;
+}
+
+.window-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+
 @media screen and (max-width: 700px) {
+    .window-container {
+        overflow-y: scroll;
+    }
+    .comparison-panel {
+        overflow-x: scroll;
+    }
     
     .sorting-panel {
         flex: none;

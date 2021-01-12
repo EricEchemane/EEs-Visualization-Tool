@@ -3,12 +3,14 @@ import { Box } from '@material-ui/core';
 import AppBar from './components/AppBar';
 
 import SortingVisualizer from './components/visualizers/SortingVisualizer';
+import CompareSortingAlgo from './components/visualizers/CompareSortingAlgorithms';
 
 import './sass/main.css';
 
 function App() {
 
     const [currentOpenTab,set_currentOpenTab] = useState(0);
+    const [comparisonApp, hide_comparisonApp] = useState(true);
 
     function changeTab(n: number) {
         set_currentOpenTab(n);
@@ -16,14 +18,18 @@ function App() {
 
     return (
         <Box>
-           <AppBar handleChangeTab={changeTab} />
+            <AppBar handleChangeTab={changeTab} />
+            
+            <Box hidden={comparisonApp} >
+                <CompareSortingAlgo />s
+            </Box>
 
            <Box
                 hidden={currentOpenTab !== 0}
                 mt={3}
                 className="f-color1" >
 
-                    <SortingVisualizer />
+                    <SortingVisualizer showComparisonApp={()=>{hide_comparisonApp(false)}} />
             </Box>
            <Box
                 hidden={currentOpenTab !== 1}

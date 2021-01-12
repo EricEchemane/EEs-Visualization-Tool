@@ -8,7 +8,8 @@ export default function Button(props: any)
             className={"oval flat btn b-accent "} 
             onClick={props.handleClick}
             style={{opacity: props.disabled ? '.4' : '1', 
-                    pointerEvents: props.disabled ? 'none':'visible'}}
+                    pointerEvents: props.disabled ? 'none' : 'visible',
+                    padding: '.2rem 1.7rem'}}
             >
                 {props.label}
         </button>
