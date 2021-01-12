@@ -1,4 +1,3 @@
-let first = true;
 export const GREEN = "yellowgreen";
 export const PURPLE = "purple";
 export const RED = "#dd6f74";
@@ -9,10 +8,6 @@ let bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElem
 
 export function changeColor(index: number, COLOR: string)
 {    
-    if (first) {
-        first = false
-        bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
-    }
     if (bars[index]) {
         bars[index].style.transition = '0ms';
         bars[index].style.backgroundColor = COLOR;
@@ -21,9 +16,5 @@ export function changeColor(index: number, COLOR: string)
 
 export function changeHeight(index: number, HEIGHT: number)
 {
-    if (first) {
-        first = false
-        bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
-    }
     if (bars[index]) bars[index].style.height = HEIGHT+"px";
 }

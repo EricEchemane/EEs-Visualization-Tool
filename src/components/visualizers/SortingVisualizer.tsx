@@ -10,6 +10,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import MergeSort from './sortingAlgorithms/MergeSort';
 import QuickSort from './sortingAlgorithms/QuickSort';
 import HeapSort from './sortingAlgorithms/HeapSort';
+import ShellSort from './sortingAlgorithms/ShellSort';
 
 // this indicates that the page loads for the first time
 let first = true;
@@ -26,8 +27,8 @@ export default function SortingVisualizer (props: any) {
     const [descending, set_descending] = useState(false);
     const [disableDescending, set_disableDescending] = useState(false);
     const sortingAlgoList = [
-        "Merge Sort", "Quick Sort", "Heap Sort", "Bubble Sort", "Insertion Sort",
-        "Selection Sort"
+        "Merge Sort", "Quick Sort", "Heap Sort", "Shell Sort","Insertion Sort", 
+        "Selection Sort","Bubble Sort"
     ];
     
     const [arraySize, set_arraySize] = useState(150)
@@ -71,6 +72,7 @@ export default function SortingVisualizer (props: any) {
         if (index === 0) MergeSort(randomNumbers, sortingSpeed, descending, enablePanels);
         else if (index === 1) QuickSort(randomNumbers, sortingSpeed, descending, enablePanels)
         else if (index === 2) HeapSort(randomNumbers, sortingSpeed, descending, enablePanels);
+        else if (index === 3) ShellSort(randomNumbers, sortingSpeed, descending, enablePanels);
     }
 
     function enablePanels(t: number) {
