@@ -171,9 +171,6 @@ export default function SortingVisualizer (props: any): JSX.Element {
                     <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
                         <ButtonAccent label="Sort !" disabled={sortDisabled} handleClick={sort} title="Start sorting" type="error" />
                     </Box>
-                    <Box m={1} display="flex" flexDirection="column" alignContent="center" justifyContent="center">
-                        <ButtonText label="Compare algorithms" disabled={compareButtonDisabled} handleClick={props.showComparisonApp} title="Compare Algorithms" />
-                    </Box>
                 </Box>
             </div>
         </Box>
