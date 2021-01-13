@@ -80,9 +80,9 @@ function merge(left: number, mid: number, right: number)
     while (i < leftsize && j < rightsize)
     {   
         // push two animations for color changes
-        animations.push([left + i, right + j]);
+        animations.push([k+i, (k+leftsize-1) + j]);
         // push the second time to revert the color
-        animations.push([left + i, right + j]);
+        animations.push([k+i, (k+leftsize-1) + j]);
         if (descend) {
             if (leftsub[i] > rightsub[j])
             {
