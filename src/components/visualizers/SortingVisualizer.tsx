@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {Box} from '@material-ui/core';
-import Button from '../../buttons/Button';
-import ButtonAccent from '../../buttons/ButtonAccent';
-import ToggleButton from '../../buttons/ToggleButton';
-import Slider from '../../inputs/slider';
+import Button from '../../components/buttons/Button';
+import ButtonAccent from '../../components/buttons/ButtonAccent';
+import ToggleButton from '../../components/buttons/ToggleButton';
+import Slider from '../../components/inputs/slider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 // Algorithms
