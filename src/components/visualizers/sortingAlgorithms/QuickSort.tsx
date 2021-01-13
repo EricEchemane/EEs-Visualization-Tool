@@ -214,7 +214,8 @@ export default function QuickSort(
     numbers: number[],
     speed: number,
     descending: boolean,
-    callback: Function)
+    callback: Function,
+    returnFrames?: boolean)
 {
     ANIMATION_SPEED = 200 - speed;
     isDescending = descending;  
@@ -224,6 +225,7 @@ export default function QuickSort(
     // ACTUAL QUICK SORT CALL
 
     sort(0, mainArray.length - 1);
+    if (returnFrames) return animations;
     animate();
     callback(animations.length);
 }

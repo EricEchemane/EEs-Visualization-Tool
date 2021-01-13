@@ -42,8 +42,8 @@ function App() {
                 Path Finder
             </Box>
             
-            <Box hidden={comparisonApp} >
-                <CompareSortingAlgo />s
+            <Box hidden={!comparisonApp} >
+                <CompareSortingAlgo close={()=>{hide_comparisonApp(true)}} />
             </Box>
         </Box>
     );  

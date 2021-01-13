@@ -38,7 +38,7 @@ function animate()
     }
 }
 // ======================== entry point =======================
-export default function MergeSort(nums: number[], speed: number, descending: boolean, callback: Function)
+export default function MergeSort(nums: number[], speed: number, descending: boolean, callback: Function, returnFrames?: boolean)
 {   
     ANIMATION_SPEED = 200 - speed;
     descend = descending;
@@ -46,6 +46,9 @@ export default function MergeSort(nums: number[], speed: number, descending: boo
     arr = Object.assign([], nums);
     // call the actual merge Sort to push all the animations
     divide(0, arr.length - 1);
+
+    if (returnFrames) return animations;
+    
     // actual animation
     animate();
     callback(animations.length)

@@ -62,7 +62,8 @@ export default function SelectionSort(
     nums: number[],
     speed: number,
     descending: boolean,
-    callback: Function)
+    callback: Function,
+    returnFrames?: boolean)
 {
     mainArray = new Array(nums.length)
     mainArray = Object.assign([], nums)
@@ -97,6 +98,7 @@ export default function SelectionSort(
         mainArray[i] = temp;
     }
     // animations start
+    if (returnFrames) return animations;
     animate();
     callback(animations.length)    
 }
@@ -105,7 +107,8 @@ export function BubbleSort(
     nums: number[],
     speed: number,
     descending: boolean,
-    callback: Function)
+    callback: Function,
+    returnFrames?: boolean)
 {
     mainArray = new Array(nums.length)
     mainArray = Object.assign([], nums)
@@ -144,6 +147,7 @@ export function BubbleSort(
         }
     }
     // animations start
+    if (returnFrames) return animations;
     animate();
     callback(animations.length)    
 }

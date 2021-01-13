@@ -62,7 +62,8 @@ export default function InsertionSort(
     nums: number[],
     speed: number,
     descending: boolean,
-    callback: Function) 
+    callback: Function,
+    returnFrames?: boolean) 
 {
     mainArray = new Array(nums.length)
     mainArray = Object.assign([], nums )
@@ -119,6 +120,7 @@ export default function InsertionSort(
         }
     }
 
+    if (returnFrames) return animations;
     animate();
     callback(animations.length)
 }

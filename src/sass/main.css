@@ -893,13 +893,14 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 1rem;
   left: 1rem;
+  width: 93%;
 }
 
 .panel {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 1000px;
+  width: 100%;
   height: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -939,6 +940,9 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
+    width: auto;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
   }
   .window-container {
     overflow-y: scroll;

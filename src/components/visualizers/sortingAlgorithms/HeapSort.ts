@@ -26,7 +26,8 @@ export default function HeapSort(
     numbers: number[],
     animation_speed: number,
     descending: boolean,
-    callback: Function
+    callback: Function,
+    returnFrames?: boolean
 )
 {
     ANIMATION_SPEED = 200 - animation_speed;
@@ -35,6 +36,7 @@ export default function HeapSort(
     animations = [];
     // actual call of heapsort algorithm
     sort();
+    if (returnFrames) return animations;
     // animate
     animate();
     callback(animations.length)

@@ -260,11 +260,12 @@ h1,h2,h3,h4,h5,h6{
     position: absolute;
     top: 1rem;
     left: 1rem;
+    width: 93%;
 }
 
 .panel {
     display: flex;
-    width: 1000px;
+    width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -294,6 +295,8 @@ h1,h2,h3,h4,h5,h6{
     }
     .panel {
         justify-content: flex-start;
+        width: auto;
+        flex-wrap: nowrap;
     }
     .window-container {
         overflow-y: scroll;

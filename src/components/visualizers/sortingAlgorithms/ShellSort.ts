@@ -62,7 +62,8 @@ export default function ShellSort(
     nums: number[],
     speed: number,
     descending: boolean,
-    callback: Function)
+    callback: Function,
+    returnFrames?: boolean )
 {
     mainArray = new Array(nums.length)
     mainArray = Object.assign([], nums )
@@ -95,6 +96,7 @@ export default function ShellSort(
         gap = Math.floor(gap / 2)
     }
 
+    if (returnFrames) return animations;
     animate();
     callback(animations.length);
 }
