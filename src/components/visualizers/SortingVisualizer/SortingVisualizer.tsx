@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import {Box} from '@material-ui/core';
-import Button from '../../components/buttons/Button';
-import ButtonAccent from '../../components/buttons/ButtonAccent';
-import ButtonText from '../../components/buttons/ButtonText';
-import ToggleButton from '../../components/buttons/ToggleButton';
-import Slider from '../../components/inputs/slider';
+import Button from '../../buttons/Button';
+import ButtonAccent from '../../buttons/ButtonAccent';
+import ToggleButton from '../../buttons/ToggleButton';
+import Slider from '../../inputs/slider';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 // Algorithms
@@ -34,9 +33,6 @@ export default function SortingVisualizer (props: any): JSX.Element {
         "Merge Sort", "Quick Sort", "Heap Sort", "Shell Sort","Insertion Sort", 
         "Selection Sort","Bubble Sort"
     ];
-
-    const [compareWindowHidden, set_CompareWindow] = useState(true);
-    const [compareButtonDisabled, set_compareButtonDisabled] = useState(false);
     
     const [arraySize, set_arraySize] = useState(150)
 
