@@ -3,12 +3,13 @@ import { Box } from '@material-ui/core';
 import AppBar from './components/AppBar';
 
 import SortingVisualizer from './components/visualizers/SortingVisualizer';
+import SearchingVisualizer from './components/visualizers/searching/SearchingVisualizer';
 
 import './sass/main.css';
 
 function App() {
 
-    const [currentOpenTab,set_currentOpenTab] = useState(0);
+    const [currentOpenTab,set_currentOpenTab] = useState(1);
 
     function changeTab(n: number) {
         set_currentOpenTab(n);
@@ -30,7 +31,7 @@ function App() {
                 mt={3}
                 className="f-color1" >
 
-                    Searhcing
+                    <SearchingVisualizer />
             </Box>
            <Box
                 hidden={currentOpenTab !== 2}
