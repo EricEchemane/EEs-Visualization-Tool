@@ -634,10 +634,54 @@ input {
   border: none;
 }
 
+input[type="range"] {
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-appearance: none;
+  width: 200px;
+  height: 10px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.4), inset -2px -2px 3px 3px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.4), inset -2px -2px 3px 3px rgba(255, 255, 255, 0.1);
+  outline: none;
+  border: none;
+  position: relative;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #0AFFEF;
+  position: relative;
+  top: -181%;
+  cursor: pointer;
+  border: 8px solid #243441;
+  -webkit-box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+input[type="range"]::-webkit-slider-thumb::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.4), inset -2px -2px 3px 3px rgba(255, 255, 255, 0.1);
+          box-shadow: inset 2px 2px 3px 3px rgba(0, 0, 0, 0.4), inset -2px -2px 3px 3px rgba(255, 255, 255, 0.1);
+}
+
+input[type="range"]::-webkit-slider-thumb::-moz-range-progress {
+  background-color: #0AFFEF;
+}
+
 body {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
 }
 
 h1,
@@ -815,18 +859,47 @@ h6 {
   top: -1rem;
 }
 
-.linearSearch {
-  width: 100%;
-  min-height: 150px;
-  max-height: 200px;
-  margin: 1rem auto;
-}
-
+.linearSearch,
 .binarySearch {
   width: 100%;
   min-height: 150px;
   max-height: 200px;
   margin: 1rem auto;
+  overflow: hidden;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  position: relative;
+}
+
+.linearSearch > div,
+.binarySearch > div {
+  height: 100%;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.2)));
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: .5rem;
+}
+
+.binarySearch > div {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.linearSearch > div > div,
+.binarySearch > div > div {
+  -webkit-box-flex: 2;
+      -ms-flex: 2 1 auto;
+          flex: 2 1 auto;
+  margin: 1px;
+  background-color: #0AFFEF;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .searchingVisualizerPanel {
@@ -834,12 +907,13 @@ h6 {
   background-color: transparent;
 }
 
-.searchingVisualizerPanel div {
+.searchingVisualizerPanel > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -847,18 +921,28 @@ h6 {
   height: 100%;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  padding: 2rem;
   background-color: transparent;
 }
 
+.searchLabel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: .5rem;
+}
+
 @media screen and (max-width: 700px) {
+  .linearSearch > div,
+  .binarySearch > div {
+    width: 1000px;
+  }
   .rgba2 {
     overflow-x: scroll;
   }
-  .searchVisualizerContainer {
-    overflow-y: scroll;
+  .searchingVisualizerPanel > div {
+    width: 600px;
   }
-  body {
+  .searchVisualizerContainer {
     overflow-y: scroll;
   }
   .sorting-panel {
