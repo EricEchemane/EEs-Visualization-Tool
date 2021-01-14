@@ -621,7 +621,7 @@ input[type="range"].slider-error::-moz-range-progress {
   margin: 0;
   padding: 0;
   background-color: #243441;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
@@ -640,7 +640,12 @@ body {
   overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: lighter;
   color: #ffffff;
 }
@@ -701,8 +706,8 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 250px;
   height: 100vh;
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .bars-container {
@@ -727,8 +732,8 @@ h1, h2, h3, h4, h5, h6 {
           flex: 2 1 auto;
   margin: 1px;
   background-color: #0AFFEF;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .algo-options {
@@ -787,7 +792,72 @@ h1, h2, h3, h4, h5, h6 {
           justify-content: center;
 }
 
+.rgba2 {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.searchVisualizerContainer {
+  overflow: hidden;
+}
+
+.searchItemInput {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  top: -1rem;
+}
+
+.linearSearch {
+  width: 100%;
+  min-height: 150px;
+  max-height: 200px;
+  margin: 1rem auto;
+}
+
+.binarySearch {
+  width: 100%;
+  min-height: 150px;
+  max-height: 200px;
+  margin: 1rem auto;
+}
+
+.searchingVisualizerPanel {
+  height: 100px;
+  background-color: transparent;
+}
+
+.searchingVisualizerPanel div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: auto;
+  height: 100%;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  padding: 2rem;
+  background-color: transparent;
+}
+
 @media screen and (max-width: 700px) {
+  .rgba2 {
+    overflow-x: scroll;
+  }
+  .searchVisualizerContainer {
+    overflow-y: scroll;
+  }
   body {
     overflow-y: scroll;
   }
