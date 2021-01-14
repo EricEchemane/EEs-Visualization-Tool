@@ -11,10 +11,15 @@ export default function SearchingVisualizer() {
     // ---> States           
 
     const [searchSize, setSearchSize] = useState(300)
-    const [searchItem, setsearchItem] = useState(0);
+    const [searchItem, setsearchItem] = useState(-1);
     const [searchArray, setSearchArray] = useState(generateRandom(searchSize));
     const [searchSpeed, setSearchSpeed] = useState(300);
     const SortedsearchArray = useRef(sorted());
+
+    const [linearSearchMessage, set_linearSearchMessage] = useState("Linear Search")
+    const [binarySearchMessage, set_binarySearchMessage] = useState("Binary Search")
+    const [linearMessageColor, setLinearMessageColor] = useState("white")
+    const [binaryMessageColor, setBinaryMessageColor] = useState("white")
 
     // -----> UseEffect      
 
@@ -25,10 +30,73 @@ export default function SearchingVisualizer() {
 
     // ---> Functions        
 
+    function animate(animationFrames: any[], CLASSNAME: string) {
+        let CHANGE_COLOR = 0;
+        let REVERT_COLOR = -1;
+        const numberOfFrames = animationFrames.length;
+
+        for(let x = 0; x < numberOfFrames; x++) {
+            const frame = animationFrames[x];
+            const state = frame.state
+            const steps = frame.steps
+            const index = frame.lookupIndex
+            const accent = '#0AFFEF';
+            const red = '#dd6f74';
+            if(state === CHANGE_COLOR) executeFrame(CLASSNAME, index, red, x)
+            else if (state === REVERT_COLOR) executeFrame(CLASSNAME, index, red, x)
+            else {
+                executeFrame(CLASSNAME, index, 'yellowgreen', x)
+                if(CLASSNAME === 'linear-bar')
+                    changeMessage('linear-bar', index, steps, x);
+                else 
+                    changeMessage('binary-bar', index, steps, x);
+                return;
+            } 
+        }
+    }
+
+    function changeMessage(CLASSNAME: string,index: number, steps: number, ms: number) {
+        setTimeout(()=>{
+            if(CLASSNAME === 'binary-bar') {
+                set_binarySearchMessage(`Found at index ${index} in ${steps} steps.`);
+                setBinaryMessageColor('yellowgreen');
+                return;
+            }
+            set_linearSearchMessage(`Found at index ${index} in ${steps} steps.`);
+            setLinearMessageColor('yellowgreen');
+        }, ms * (301 - searchSpeed));
+    }
+
+    function executeFrame(CLASSNAME: string, x: number, COLOR: string, ms: number) {
+        setTimeout(()=>{
+            changeColor(CLASSNAME, x, COLOR);
+        }, ms * (301 - searchSpeed));
+    }
+
+    function changeColor(CLASSNAME: string, index: number, COLOR: string) {
+        const items = (document.getElementsByClassName(CLASSNAME) as HTMLCollectionOf<HTMLElement>)
+        if(items[index]) {
+            items[index].style.backgroundColor = COLOR;
+        }
+    }
+
     function searchNow() {
+        if(searchItem < 0) {
+            alert('Please input a positive integer.')
+            return;
+        }
+
+        for(let x = 0; x < searchArray.length; x++) {
+            changeColor('linear-bar', x, '#0AFFEF')
+            changeColor('binary-bar', x, '#0AFFEF')
+        }
+
         let ANIMATIONS = getAnimations(searchArray, searchItem)
         let LINEAR_ANIMATION = ANIMATIONS[0]
         let BINARY_ANIMATION = ANIMATIONS[1]
+        
+        animate(LINEAR_ANIMATION, 'linear-bar');
+        animate(BINARY_ANIMATION, 'binary-bar');
     }
 
     function changeSearchSpeed(newSpeed: number) {
@@ -92,7 +160,7 @@ export default function SearchingVisualizer() {
             </Box>
             <Box
                 className="linearSearch rgba2" >
-                <h3 className="searchLabel" >Linear Search</h3>
+                <h3 className="searchLabel" style={{color: linearMessageColor}} > {linearSearchMessage} </h3>
                 <div>
                     {searchArray.map((each: number, idx: number) =>
                         <div
@@ -105,7 +173,7 @@ export default function SearchingVisualizer() {
             </Box>
             <Box
                 className="binarySearch rgba2" >
-                <h3 className="searchLabel" >Binary Search</h3>
+                <h3 className="searchLabel" style={{color: binaryMessageColor}} > {binarySearchMessage} </h3>
                 <div>
                     {
                         SortedsearchArray.current.map((each: number, idx: number) =>
