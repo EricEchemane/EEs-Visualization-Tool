@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 export default function AppBar (props: any) {
 
-    const [activeTab, set_activeTab] = useState(1);
+    const [activeTab, set_activeTab] = useState(2);
 
     // function hideSideMenu(trans: string) {
     //     const dimmer = document.getElementById('dimmer');

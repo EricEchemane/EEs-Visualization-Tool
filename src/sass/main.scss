@@ -33,11 +33,11 @@ input {
 }
 
 input[type="range"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    @include slider($b-accent);
+  -webkit-appearance: none;
+  @include slider($b-accent);
 }
 
 body {
@@ -205,7 +205,7 @@ h6 {
   margin: 1rem auto;
   overflow: hidden;
   flex-wrap: nowrap;
-  position: relative;   
+  position: relative;
 }
 .linearSearch > div,
 .binarySearch > div {
@@ -213,7 +213,7 @@ h6 {
   background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
   display: flex;
   align-items: flex-start;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 .binarySearch > div {
   align-items: flex-end;
@@ -242,11 +242,11 @@ h6 {
 }
 
 .searchLabel {
-    position: absolute;    
-    top: 1rem;
-    left: 1rem;
-    padding: .5rem;
-    opacity: .9;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem;
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 700px) {

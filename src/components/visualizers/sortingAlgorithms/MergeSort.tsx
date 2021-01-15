@@ -13,8 +13,7 @@ let animations = [] as any;
 // finally, the third of the triplet is where the changing the height of a bar
 
 // ======================== ANIMATE =======================
-function animate()
-{
+function animate() {
     for (let x = 0; x < animations.length; x++) {
         // change the color if the current iteration is not the third of the triplet
         // example 1: if x = 0 then x % 3 = 0 and not 2 then change the color.
@@ -33,13 +32,12 @@ function animate()
         else {
             setTimeout(() => {
                 changeHeight(animations[x][0], animations[x][1]);
-            }, x * ANIMATION_SPEED);
+            }, (x) * (ANIMATION_SPEED));
         }
     }
 }
 // ======================== entry point =======================
-export default function MergeSort(nums: number[], speed: number, descending: boolean, callback: Function, returnFrames?: boolean)
-{   
+export default function MergeSort(nums: number[], speed: number, descending: boolean, callback: Function, returnFrames?: boolean) {
     ANIMATION_SPEED = 200 - speed;
     descend = descending;
     animations = [];
@@ -48,15 +46,14 @@ export default function MergeSort(nums: number[], speed: number, descending: boo
     divide(0, arr.length - 1);
 
     if (returnFrames) return animations;
-    
+
     // actual animation
     animate();
     callback(animations.length)
 }
 
 // ====================== MERGE SORT DIVIDE ============================
-function divide(left: number, right: number)
-{
+function divide(left: number, right: number) {
     if (left >= right)
         return;
     const mid = Math.floor((right + left) / 2)
@@ -68,8 +65,7 @@ function divide(left: number, right: number)
     merge(left, mid, right);
 }
 // ====================== MERGE SORT COMBINE ============================
-function merge(left: number, mid: number, right: number)
-{
+function merge(left: number, mid: number, right: number) {
     const leftsize = mid - left + 1;
     const rightsize = right - mid;
     const leftsub = arr.slice(left, mid + 1);
@@ -77,46 +73,40 @@ function merge(left: number, mid: number, right: number)
     let i = 0;
     let j = 0;
     let k = left;
-    while (i < leftsize && j < rightsize)
-    {   
+    while (i < leftsize && j < rightsize) {
         // push two animations for color changes
-        animations.push([k+i, (k+leftsize-1) + j]);
+        animations.push([k, (leftsize) + j]);
         // push the second time to revert the color
-        animations.push([k+i, (k+leftsize-1) + j]);
+        animations.push([k, (leftsize) + j]);
         if (descend) {
-            if (leftsub[i] > rightsub[j])
-            {
+            if (leftsub[i] > rightsub[j]) {
                 // push the Height changes
                 animations.push([k, leftsub[i]]);
                 arr[k] = leftsub[i];
                 i++; k++;
             }
-            else
-            {   
+            else {
                 // push the Height changes
-                animations.push([k , rightsub[j]]);
+                animations.push([k, rightsub[j]]);
                 arr[k] = rightsub[j];
                 j++; k++;
-            } 
+            }
             continue;
         }
-        if (leftsub[i] < rightsub[j])
-        {
+        if (leftsub[i] < rightsub[j]) {
             // push the Height changes
             animations.push([k, leftsub[i]]);
             arr[k] = leftsub[i];
             i++; k++;
         }
-        else
-        {   
+        else {
             // push the Height changes
-            animations.push([k , rightsub[j]]);
+            animations.push([k, rightsub[j]]);
             arr[k] = rightsub[j];
             j++; k++;
         }
     }
-    while (i < leftsize)
-    {
+    while (i < leftsize) {
         // here we should push a TRIPLET to maintain the ratio of the animatino sequence
         animations.push([left + i, left + i]);
         animations.push([left + i, left + i]);
@@ -127,8 +117,7 @@ function merge(left: number, mid: number, right: number)
         k++;
     }
 
-    while (j < rightsize)
-    {
+    while (j < rightsize) {
         animations.push([right + j, right + j]);
         animations.push([right + j, right + j]);
         animations.push([k, rightsub[j]]);

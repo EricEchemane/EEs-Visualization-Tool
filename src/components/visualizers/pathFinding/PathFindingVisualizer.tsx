@@ -1,4 +1,4 @@
-import {Box} from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 export default function PathFindingVisualizer() {
     return (
@@ -8,8 +8,9 @@ export default function PathFindingVisualizer() {
             style={{
                 width: '98vw', height: '80vh', position: 'relative',
                 margin: 'auto', top: '1rem', overflow: 'hidden',
-                borderRadius: '10px'}} >
-            
+                borderRadius: '10px'
+            }} >
+            Path Finding
         </Box>
     )
 }

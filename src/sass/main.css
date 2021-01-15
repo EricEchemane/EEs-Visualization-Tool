@@ -882,7 +882,7 @@ h6 {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .binarySearch > div {
@@ -928,8 +928,8 @@ h6 {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  padding: .5rem;
-  opacity: .9;
+  padding: 0.5rem;
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 700px) {
