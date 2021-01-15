@@ -40,7 +40,7 @@ export default function SearchingVisualizer() {
             const state = frame.state
             const steps = frame.steps
             const index = frame.lookupIndex
-            const accent = '#0AFFEF';
+            // const accent = '#0AFFEF';
             const red = '#dd6f74';
             if(state === CHANGE_COLOR) executeFrame(CLASSNAME, index, red, x)
             else if (state === REVERT_COLOR) executeFrame(CLASSNAME, index, red, x)
@@ -91,16 +91,31 @@ export default function SearchingVisualizer() {
             changeColor('binary-bar', x, '#0AFFEF')
         }
 
+        set_binarySearchMessage('Searching binary...')  
+        set_linearSearchMessage('Searching linearly...');
+        setBinaryMessageColor('rgba(255,255,255,.7)')
+        setLinearMessageColor('rgba(255,255,255,.7)')
+
         let ANIMATIONS = getAnimations(searchArray, searchItem)
         let LINEAR_ANIMATION = ANIMATIONS[0]
         let BINARY_ANIMATION = ANIMATIONS[1]
         
         animate(LINEAR_ANIMATION, 'linear-bar');
+        if(LINEAR_ANIMATION.length === searchArray.length * 2) {
+            setTimeout(()=>{
+                set_linearSearchMessage(`Item ${searchItem} not found.`)
+                setLinearMessageColor('red')
+            },(searchArray.length * 2) * (301 - searchSpeed))
+        }
+        
+        let binarySearchWorstTime = Math.floor(Math.log2(searchArray.length) + 1) * 2;
+        if(BINARY_ANIMATION.length === binarySearchWorstTime) {
+            setTimeout(()=>{
+                set_binarySearchMessage(`Item ${searchItem} not found.`)
+                setBinaryMessageColor('red')
+            },(binarySearchWorstTime) * (301 - searchSpeed))
+        }
         animate(BINARY_ANIMATION, 'binary-bar');
-    }
-
-    function changeSearchSpeed(newSpeed: number) {
-        setSearchSpeed(newSpeed);
     }
 
     function changeSize(newSize: number) {
@@ -125,7 +140,7 @@ export default function SearchingVisualizer() {
         const array = [];
         for (let x = 0; x < size; x++) {
             const random = Math.floor(Math.random() * (110 - 2 + 1) + 2)
-            array.push(random);
+            array.push(random); 
         }
         return array;
     }
@@ -149,7 +164,7 @@ export default function SearchingVisualizer() {
                     margin="auto"
                     flex={1}
                     className="transparent">
-                    Search for:
+                    <Box component="span" mr={1}>Search for :</Box> 
                     <TextField
                         handleInput={(n: number)=>{
                             setsearchItem(n);

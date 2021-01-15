@@ -17,7 +17,8 @@ export default function getAnimations(array: number[], searchItem: number) {
     fill_LinearAnimationFrames(array, searchItem);
     fill_BinaryAnimationFrames(array, searchItem);
 
-    console.log(BINARY_SEARCH_ANIMATIONS)
+    console.log(LINEAR_SEARCH_ANIMATIONS.length)
+    console.log(BINARY_SEARCH_ANIMATIONS.length)
 
     return [
         LINEAR_SEARCH_ANIMATIONS,
