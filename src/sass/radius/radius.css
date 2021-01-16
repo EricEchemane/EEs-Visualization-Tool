@@ -1,0 +1,20 @@
+.rec {
+  border-radius: 8px;
+}
+
+.m-rec {
+  border-radius: 16px;
+}
+
+.l-rec {
+  border-radius: 24px;
+}
+
+.oval {
+  border-radius: 16px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+/*# sourceMappingURL=radius.css.map */

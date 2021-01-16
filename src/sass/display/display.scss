@@ -1,0 +1,38 @@
+.d-inline {
+    display: inline;
+}
+
+.d-block {
+    display: block;
+}
+.d-inline-block {
+    display: inline-block;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.align-hor {
+    justify-content: center;
+}
+
+.align-vert {
+    align-items: center;
+}
+
+.fullwidth {
+    width: 100%;
+}

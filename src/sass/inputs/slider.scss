@@ -1,0 +1,75 @@
+
+@mixin slider ($color) {
+
+    -webkit-appearance: none;
+    width: 200px;
+    height: 10px;
+    border-radius: 4px;
+    box-shadow: $thin-inset;
+    outline: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: $color;
+        position: relative;
+        top: -181%;
+        cursor: pointer;
+        border: 8px solid $b-prime;
+        box-shadow: 0 0 5px 3px rgba(0,0,0,.5);
+        z-index: 2;
+    }
+
+
+    &::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        height: 5px;
+        border-radius: 5px;
+        box-shadow: $thin-inset;
+    }
+    &::-moz-range-progress {
+        background-color: $color;
+    }
+}
+
+input[type="range"].slider-accent {
+    @include slider($b-accent);
+}
+input[type="range"].slider-error {
+    @include slider($b-error);
+}
+.slider-progress-accent {
+    position: absolute;
+    width: 75px;
+    height: 4px;
+    top: 13px;
+    left: 8px;
+    background-color: $b-accent;
+    border-radius: 10px;
+    background-image: url(../assets/sliderTexture.png);
+    background-size: 12%;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-blend-mode:hue;
+    transition: none;
+}
+.slider-progress-error {
+    position: absolute;
+    width: 75px;
+    height: 4px;
+    top: 13px;
+    left: 8px;
+    background-color: $b-error;
+    border-radius: 10px;
+    background-image: url(../assets/sliderTexture.png);
+    background-size: 10%;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-blend-mode:darken;
+    transition: none;
+}

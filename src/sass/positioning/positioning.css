@@ -1,0 +1,32 @@
+.static {
+  position: static;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.center {
+  margin: auto;
+}
+
+.center-abs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.text-center {
+  text-align: center;
+}
+/*# sourceMappingURL=positioning.css.map */
