@@ -65,7 +65,6 @@ export default function SortingVisualizer(props: any): JSX.Element {
    function sort() {
       // check what algorithm to be use
       let bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
-      console.log(bars)
       for (let x = 0; x < bars.length; x++) {
          if (bars[x]) {
             bars[x].style.backgroundColor = "red"
