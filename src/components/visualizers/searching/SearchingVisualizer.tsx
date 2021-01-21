@@ -89,6 +89,8 @@ export default function SearchingVisualizer() {
    }
 
    function searchNow() {
+      setlfound(false)
+      setbfound(false)
       if (searchItem < 0) {
          alert('Please input a positive integer.')
          return;
