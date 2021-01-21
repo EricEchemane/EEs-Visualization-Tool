@@ -119,14 +119,14 @@ export default function SearchingVisualizer() {
          }, (searchArray.length * 2) * (301 - searchSpeed))
       }
 
-      let binarySearchWorstTime = Math.floor(Math.log2(searchArray.length) + 1) * 2;
-      if (BINARY_ANIMATION.length === binarySearchWorstTime) {
+      animate(BINARY_ANIMATION, 'binary-bar');
+      let binarySearchWorstTime = (Math.floor(Math.log2(searchArray.length)) * 2);
+      if (searchArray.indexOf(searchItem) == -1 || BINARY_ANIMATION.length === binarySearchWorstTime) {
          setTimeout(() => {
             set_binarySearchMessage(`Item ${searchItem} not found.`)
             setBinaryMessageColor('red')
          }, (binarySearchWorstTime) * (301 - searchSpeed))
       }
-      animate(BINARY_ANIMATION, 'binary-bar');
    }
 
    function changeSize(newSize: number) {
@@ -145,7 +145,7 @@ export default function SearchingVisualizer() {
       let bars = (document.getElementsByClassName('bars') as HTMLCollectionOf<HTMLElement>)
       const array = [];
       for (let x = 0; x < size; x++) {
-         const random = Math.floor(Math.random() * (110 - 2 + 1) + 2)
+         const random = Math.floor(Math.random() * (110 - 1 + 1) + 1)
          array.push(random);
       }
       return array;
@@ -236,7 +236,7 @@ export default function SearchingVisualizer() {
                      onInput={(event: any) => { changeSize(event.target.value) }}
                      value={searchSize}
                      min={10}
-                     max={200} />
+                     max={300} />
                </Box>
                <Box
                   ml={2} mr={2}
