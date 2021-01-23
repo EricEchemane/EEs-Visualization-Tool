@@ -121,8 +121,9 @@ export default function SearchingVisualizer() {
 
       animate(BINARY_ANIMATION, 'binary-bar');
       let binarySearchWorstTime = (Math.floor(Math.log2(searchArray.length)) * 2);
-      if (searchArray.indexOf(searchItem) == -1 || BINARY_ANIMATION.length === binarySearchWorstTime) {
+      if (BINARY_ANIMATION.length === binarySearchWorstTime) {
          setTimeout(() => {
+            setbfound(true);
             set_binarySearchMessage(`Item ${searchItem} not found.`)
             setBinaryMessageColor('red')
          }, (binarySearchWorstTime) * (301 - searchSpeed))
