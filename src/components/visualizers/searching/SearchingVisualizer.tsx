@@ -113,20 +113,20 @@ export default function SearchingVisualizer() {
       animate(LINEAR_ANIMATION, 'linear-bar');
 
       if (LINEAR_ANIMATION.length === searchArray.length * 2) {
-         setTimeout(() => {
+         timeouts.push(setTimeout(() => {
             set_linearSearchMessage(`Item ${searchItem} not found.`)
             setLinearMessageColor('red')
-         }, (searchArray.length * 2) * (301 - searchSpeed))
+         }, (searchArray.length * 2) * (301 - searchSpeed)))
       }
 
       animate(BINARY_ANIMATION, 'binary-bar');
       let binarySearchWorstTime = (Math.floor(Math.log2(searchArray.length)) * 2);
       if (BINARY_ANIMATION.length === binarySearchWorstTime) {
-         setTimeout(() => {
+         timeouts.push(setTimeout(() => {
             setbfound(true);
             set_binarySearchMessage(`Item ${searchItem} not found.`)
             setBinaryMessageColor('red')
-         }, (binarySearchWorstTime) * (301 - searchSpeed))
+         }, (binarySearchWorstTime) * (301 - searchSpeed)))
       }
    }
 
