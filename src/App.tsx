@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@material-ui/core';
+import {Box } from '@material-ui/core';
 import AppBar from './components/AppBar';
 
 import SortingVisualizer from './components/visualizers/SortingVisualizer';
