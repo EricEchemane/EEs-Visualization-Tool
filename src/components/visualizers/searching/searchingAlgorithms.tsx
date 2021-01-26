@@ -32,7 +32,7 @@ function resetAnimations() {
 function fill_LinearAnimationFrames(array: number[], searchItem: number) {
    for (let x = 0; x < array.length; x++) {
       let newFrame: Frame;
-      if (array[x] === searchItem) {
+      if (array[x] == searchItem) {
          newFrame = {
             state: FOUND,
             lookupIndex: x, // the index where the saerchItem were found
@@ -94,7 +94,7 @@ function binSearch(
 
    let newFrame: Frame;
 
-   if (midElement === searchItem) {
+   if (midElement == searchItem) {
       newFrame = {
          state: FOUND,
          lookupIndex: midIndex,
