@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 export default function AppBar(props: any) {
 
-   const [activeTab, set_activeTab] = useState(0);
+   const [activeTab, set_activeTab] = useState(2);
 
    function activeTabIndicator(n: number) {
       set_activeTab(n);
@@ -40,6 +40,7 @@ export default function AppBar(props: any) {
             <Box display="flex" justifyContent="center" alignItems="center" mt={1}>
                <ButtonText active={activeTab === 0} handleClick={() => activeTabIndicator(0)} className="app-tabs" label="Sorting" id="sort-v-btn" value="0" />
                <ButtonText active={activeTab === 1} handleClick={() => activeTabIndicator(1)} className="app-tabs" label="Searching" id="search-v-btn" value="1" />
+               <ButtonText active={activeTab === 2} handleClick={() => activeTabIndicator(2)} className="app-tabs" label="Path Finding" id="pathFinding-v-btn" value="2" />
             </Box>
 
          </Grid>
