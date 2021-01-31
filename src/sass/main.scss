@@ -250,26 +250,14 @@ h6 {
 }
 
 //  @@@@@@@@@@@@@@@@@@@@@ PATH FINDING VISUALIZER @@@@@@@@@@@@@@@@@@@@@
-#pathFinding-panel-container {
-  width: 96%;
-  height: 50px;
-  margin: auto;
-  position: relative;
-  top: -1rem;
-}
-
-#pathFinding-panel-container > div {
-  width: 1200px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .pathfinding-algoOptions {
   width: 200px;
   height: 35px;
-  position: relative;
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pathfinding-algo-dropdown {
@@ -305,9 +293,6 @@ h6 {
 
 //  @@@@@@@@@@@@@@@@@@@@@ MEDIA QUERY @@@@@@@@@@@@@@@@@@@@@
 @media screen and (max-width: 700px) {
-  #pathFinding-panel-container {
-    overflow-x: scroll;
-  }
   .linearSearch > div,
   .binarySearch > div {
     width: 1000px;

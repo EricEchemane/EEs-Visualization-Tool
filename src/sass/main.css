@@ -932,32 +932,14 @@ h6 {
   opacity: 0.9;
 }
 
-#pathFinding-panel-container {
-  width: 96%;
-  height: 50px;
-  margin: auto;
-  position: relative;
-  top: -1rem;
-}
-
-#pathFinding-panel-container > div {
-  width: 1200px;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .pathfinding-algoOptions {
   width: 200px;
   height: 35px;
-  position: relative;
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 
 .pathfinding-algo-dropdown {
@@ -1003,9 +985,6 @@ h6 {
 }
 
 @media screen and (max-width: 700px) {
-  #pathFinding-panel-container {
-    overflow-x: scroll;
-  }
   .linearSearch > div,
   .binarySearch > div {
     width: 1000px;
