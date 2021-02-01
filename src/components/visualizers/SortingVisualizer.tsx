@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Box } from '@material-ui/core';
 import Button from '../../components/buttons/Button';
 import ButtonAccent from '../../components/buttons/ButtonAccent';
@@ -17,7 +17,7 @@ import { BubbleSort } from './sortingAlgorithms/SelectionSort';
 
 // this indicates that the page loads for the first time
 let first = true;
-export default function SortingVisualizer(props: any): JSX.Element {
+function SortingVisualizer(props: any): JSX.Element {
 
    const [algoOptionsOpen, set_algoOptionsOpen] = useState(false);
    const [chosenAlgo, set_chosenAlgo] = useState("Choose an algorithm");
@@ -180,3 +180,4 @@ export default function SortingVisualizer(props: any): JSX.Element {
       </Box>
    )
 }
+export default memo(SortingVisualizer);

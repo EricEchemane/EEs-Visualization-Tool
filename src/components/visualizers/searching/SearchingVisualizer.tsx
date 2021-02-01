@@ -1,14 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, memo } from 'react'
 import { Box } from '@material-ui/core';
 import TextField from '../../inputs/TextField';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import Button from '../../buttons/Button';
 import getAnimations from './searchingAlgorithms';
 
-export default function SearchingVisualizer() {
-
+function SearchingVisualizer()
+{
    // ---> States
-
    const [searchSize, setSearchSize] = useState(300)
    const [searchItem, setsearchItem] = useState(-1);
    const [searchArray, setSearchArray] = useState(generateRandom(searchSize));
@@ -285,6 +284,4 @@ export default function SearchingVisualizer() {
       </Box>
    )
 }
-
-/*
-*/
+export default memo(SearchingVisualizer);

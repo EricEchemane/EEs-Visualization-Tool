@@ -258,6 +258,7 @@ h6 {
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
 }
 
 .pathfinding-algo-dropdown {
@@ -291,8 +292,86 @@ h6 {
   }
 }
 
+.search-field {
+  width: 98%;
+  height: 390px;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  top: 1rem;
+}
+
+.search-field > div {
+  width: 1250px;
+  height: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(90, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  grid-gap: 0;
+  position: relative;
+}
+
+.node {
+  opacity: 0.1;
+  border: 1px solid white;
+}
+
+.start {
+  background-color: yellowgreen;
+  opacity: 1;
+  cursor: pointer;
+  border: none;
+  transform: scale(1.5);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.finish {
+  background-color: crimson;
+  opacity: 1;
+  cursor: pointer;
+  border: none;
+  transform: scale(1.5);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.obstacle {
+  background-color: white;
+}
+
+.pathFinding-panel {
+  position: absolute;
+  bottom: 2rem;
+  height: 50px;
+  width: 90vw;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+.pathFinding-panel > div {
+  width: 1000px;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
 //  @@@@@@@@@@@@@@@@@@@@@ MEDIA QUERY @@@@@@@@@@@@@@@@@@@@@
 @media screen and (max-width: 700px) {
+  .pathFinding-panel {
+    overflow-x: scroll;
+    width: 80vw;
+    bottom: 5rem;
+  }
+  .pathFinding-panel > div {
+    margin: 0;
+    justify-content: flex-start;
+    width: auto;
+  }
+  .search-field {
+    overflow-x: scroll;
+  }
   .linearSearch > div,
   .binarySearch > div {
     width: 1000px;
