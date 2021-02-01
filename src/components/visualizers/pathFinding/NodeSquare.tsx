@@ -18,7 +18,11 @@ function NodeSquare(props: any)
     }
     function handleMouseEnter(){
         if(start || finish) return;
-        if(mouseIsDown.MouseDown) set_obstacle((prev: any) => !prev);
+        if(mouseIsDown.MouseDown) {
+            const box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+            if(!obstacle) box[props.id].classList.add('obstacle');
+            else box[props.id].classList.remove('obstacle');
+        }
     }
     function handleMouseUp() {
         props.onMouseDown(false);

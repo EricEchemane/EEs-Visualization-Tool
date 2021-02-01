@@ -57,8 +57,13 @@ function PathFindingVisualizer()
     function changeSpeed(e: any) {
         const value = e.target.value;
         setSpeed(value);
-        console.log(value);
-        
+    }
+
+    function clearField() {
+        let boxes = document.querySelectorAll('.obstacle');
+        for(let x = 0; x < boxes.length; x++) {
+            boxes[x].classList.remove('obstacle');
+        }
     }
 
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -102,10 +107,10 @@ function PathFindingVisualizer()
                 <div>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <Box m={1}>Change Speed</Box>
-                        <input type="range" min={0.1} max={300} onChange={changeSpeed} />
+                        <input aria-label="pathfinding-speed" type="range" min={0.1} max={300} onChange={changeSpeed} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Clear field" />
+                        <Button label="Clear field" handleClick={clearField} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <ButtonAccent type="accent" label="Find the path!" />
