@@ -54,6 +54,13 @@ function PathFindingVisualizer()
         set_algoOptionsDropdown(false);
     }
 
+    function changeSpeed(e: any) {
+        const value = e.target.value;
+        setSpeed(value);
+        console.log(value);
+        
+    }
+
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const algoOptions = algortihms.current.map((each: any) => 
         <div key={each.id} onClick={()=>{selectAlgo(each.id)}} > {each.name} </div>
@@ -95,7 +102,7 @@ function PathFindingVisualizer()
                 <div>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <Box m={1}>Change Speed</Box>
-                        <input type="range"/>
+                        <input type="range" min={0.1} max={300} onChange={changeSpeed} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <Button label="Clear field" />
