@@ -1006,6 +1006,10 @@ h6 {
       grid-template-rows: repeat(30, 1fr);
   grid-gap: 0;
   position: relative;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.2)), color-stop(transparent), color-stop(rgba(255, 255, 255, 0.1)), color-stop(transparent), to(rgba(0, 0, 0, 0.2)));
+  background: linear-gradient(rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.1), transparent, rgba(0, 0, 0, 0.2));
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .node {
@@ -1036,7 +1040,7 @@ h6 {
 }
 
 .obstacle {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .pathFinding-panel {

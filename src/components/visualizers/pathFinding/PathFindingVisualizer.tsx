@@ -12,6 +12,7 @@ function PathFindingVisualizer()
 {
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
     const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
+    const [speed, setSpeed] = useState(0.1);
     
     const algortihms = useRef([
         {id: 0, name: 'Breadth First Search'},
@@ -21,8 +22,8 @@ function PathFindingVisualizer()
     ])
 
     const [nodes, setNodes] = useState([] as any);
-    const [start, setStart] = useState(195);
-    const [finish, setFinish] = useState(1798);
+    const [start, setStart] = useState(1370);
+    const [finish, setFinish] = useState(1420);
     const [prevNode, setPrevNode] = useState(-1);
 
     const [isMouseDown, set_isMouseDown] = useState(false);
