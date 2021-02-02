@@ -5,6 +5,7 @@ import { Box } from '@material-ui/core';
 import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import { useState, useRef, useMemo } from 'react';
+import Algorithms, {bfs} from './Algorithms';
 
 export const mouseDownContext = createContext({} as any);
 
@@ -13,7 +14,7 @@ function PathFindingVisualizer()
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
     const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
     const [speed, setSpeed] = useState(0.1);
-    
+
     const algortihms = useRef([
         {id: 0, name: 'Breadth First Search'},
         {id: 1, name: 'Depth First Search'},
@@ -31,7 +32,9 @@ function PathFindingVisualizer()
     useMemo(() => {
         const hey = [] as any;
         for(let x = 0; x < 90 * 30; x++){
-            hey.push(<NodeSquare 
+            hey.push(<NodeSquare
+                changeStart={handleChangeStart}
+                changeFinish={handleChangeFinish}
                 changePrev={(id: number) => {setPrevNode(id)}}
                 onMouseDown={(b:boolean) => {set_isMouseDown(b)}}
                 isStart={x === start}
@@ -43,7 +46,15 @@ function PathFindingVisualizer()
     }, [start, finish]);
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+    function findThePath() {
+       bfs(start, finish);
+    }
+    function handleChangeStart(n: number) {
+        setStart(n);
+    }
+    function handleChangeFinish(n: number) {
+        setFinish(n);
+    }
     const ShowAlgoOptionsDropdown = () =>
     {
         set_algoOptionsDropdown((prev: boolean) => !prev);
@@ -53,21 +64,18 @@ function PathFindingVisualizer()
         setActiveAlgo(algortihms.current[id]);
         set_algoOptionsDropdown(false);
     }
-
     function changeSpeed(e: any) {
         const value = e.target.value;
         setSpeed(value);
     }
-
     function clearField() {
         let boxes = document.querySelectorAll('.obstacle');
         for(let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('obstacle');
         }
     }
-
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    const algoOptions = algortihms.current.map((each: any) => 
+    const algoOptions = algortihms.current.map((each: any) =>
         <div key={each.id} onClick={()=>{selectAlgo(each.id)}} > {each.name} </div>
     )
 
@@ -81,13 +89,13 @@ function PathFindingVisualizer()
             margin: 'auto', top: '1rem', overflow: 'hidden',
             borderRadius: '10px'
             }}>
-            
+
             <div className={"pathfinding-algoOptions"}>
                 <div className="pathfinding-algo-dropdown" onClick={ShowAlgoOptionsDropdown}>
                     <div> {activeAlgo.name} </div>
                     <ArrowDropDownIcon />
                 </div>
-                
+
                 <Box hidden={!algoOptionsDropdown}>
                     <div className="pathAlgo-options">
                         {algoOptions}
@@ -102,7 +110,7 @@ function PathFindingVisualizer()
                     </div>
                 </mouseDownContext.Provider>
             </div>
-            
+
             <div className="pathFinding-panel">
                 <div>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
@@ -113,7 +121,7 @@ function PathFindingVisualizer()
                         <Button label="Clear field" handleClick={clearField} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <ButtonAccent type="accent" label="Find the path!" />
+                        <ButtonAccent handleClick={findThePath} type="accent" label="Find the path!" />
                     </Box>
                 </div>
             </div>

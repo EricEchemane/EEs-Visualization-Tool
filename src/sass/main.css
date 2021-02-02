@@ -941,6 +941,8 @@ h6 {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   z-index: 2;
+  -webkit-transition: 0.1s ease;
+  transition: 0.1s ease;
 }
 
 .pathfinding-algo-dropdown {
@@ -1026,6 +1028,8 @@ h6 {
           transform: scale(1.5);
   border-radius: 50%;
   border: 2px solid white;
+  -webkit-transition: 0;
+  transition: 0;
 }
 
 .finish {
@@ -1037,6 +1041,8 @@ h6 {
           transform: scale(1.5);
   border-radius: 50%;
   border: 2px solid white;
+  -webkit-transition: 0;
+  transition: 0;
 }
 
 .obstacle {

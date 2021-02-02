@@ -2,7 +2,7 @@ import { memo, useState, useContext } from 'react';
 import {mouseDownContext} from './PathFindingVisualizer';
 
 function NodeSquare(props: any)
-{   
+{
     const mouseIsDown = useContext(mouseDownContext);
     const [start, set_start] = useState(props.isStart);
     const [finish, set_finish] = useState(props.isFinish);
@@ -42,11 +42,13 @@ function NodeSquare(props: any)
         if(box[mouseIsDown.prev].classList[1] === 'start'){
             box[props.id].classList.add('start');
             box[mouseIsDown.prev].classList.remove('start');
+            props.changeStart(props.id);
             set_start(true);
         }
         else if(box[mouseIsDown.prev].classList[1] === 'finish'){
             box[props.id].classList.add('finish');
             box[mouseIsDown.prev].classList.remove('finish');
+            props.changeFinish(props.id);
             set_finish(true);
         }
         box[props.id].setAttribute('draggable', 'true');
