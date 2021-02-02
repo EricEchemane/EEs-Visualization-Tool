@@ -13,7 +13,7 @@ function PathFindingVisualizer()
 {
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
     const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
-    const [speed, setSpeed] = useState(95);
+    const [speed, setSpeed] = useState(96);
 
     const algortihms = useRef([
         {id: 0, name: 'Breadth First Search'},
@@ -37,7 +37,8 @@ function PathFindingVisualizer()
         const hey = [] as any;
         for(let x = 0; x < 90 * 30; x++){
             hey.push(<NodeSquare
-                onMouseEnter={(b: boolean)=>{findThePath(b)}}
+                clearPath={clearPath}
+                onMouseEnter={findThePath}
                 changeStart={handleChangeStart}
                 changeFinish={handleChangeFinish}
                 changePrev={(id: number) => {setPrevNode(id)}}
@@ -51,14 +52,28 @@ function PathFindingVisualizer()
     }, [start, finish]);
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    function findThePath(instant?: boolean) {
+    function findThePath(s: number, en: number, instant?: boolean) {
+        if(instant) {
+            let frames = Algorithms(finish, s, activeAlgo.id)[1];
+            let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+            for(let x = 0; x<frames.length; x++) {
+                if(frames[x] === finish) break;
+                if(boxes[frames[x]]) {
+                    boxes[frames[x]].classList.add('path');
+                }
+            }
+            return;
+        }
        clearPath();
+       clearVisited();
         // this will accept two array
-       let animationFrames = Algorithms(finish, start, activeAlgo.id);
-
+       let animationFrames = Algorithms(finish, s, activeAlgo.id);
        animate(animationFrames[0], 'visited');
        setTimeout(()=>{
            animatePath(animationFrames[1]);
+           setTimeout(() => {
+                clearVisited();
+           }, animationFrames[1].length * (120 - speed));
        }, animationFrames[0].length * (100 - speed))
     }
     function animate(frames: number[], classname: string) {
@@ -147,7 +162,7 @@ function PathFindingVisualizer()
     }
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const algoOptions = algortihms.current.map((each: any) =>
-        <div key={each.id} onClick={()=>{selectAlgo(each.id); clearVisited(); clearPath(); addBorderWalls();}} > {each.name} </div>
+        <div key={each.id} onClick={()=>{selectAlgo(each.id)}} > {each.name} </div>
     )
 
     // MARK UP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -192,7 +207,7 @@ function PathFindingVisualizer()
                         <Button label="Reset Field" handleClick={resetField} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <ButtonAccent handleClick={findThePath} type="accent" label="Find the path!" />
+                        <ButtonAccent handleClick={() => {findThePath(start, finish, false)}} type="accent" label="Find the path!" />
                     </Box>
                 </div>
             </div>

@@ -1024,8 +1024,8 @@ h6 {
   opacity: 1;
   cursor: pointer;
   border: none;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  -webkit-transform: scale(2);
+          transform: scale(2);
   border-radius: 50%;
   border: 2px solid white;
   -webkit-transition: 0;
@@ -1037,8 +1037,8 @@ h6 {
   opacity: 1;
   cursor: pointer;
   border: none;
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  -webkit-transform: scale(2);
+          transform: scale(2);
   border-radius: 50%;
   border: 2px solid white;
   -webkit-transition: 0;

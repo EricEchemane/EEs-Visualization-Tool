@@ -13,20 +13,29 @@ function NodeSquare(props: any)
     function handleMouseDown(e: any) {
         if(start || finish) return;
         e.preventDefault();
-        props.onMouseDown(true);
+        props.onMouseDown(mouseIsDown.s,true);
         set_obstacle((prev: any) => !prev);
     }
     function handleMouseEnter(){
         if(start || finish) return;
         if(mouseIsDown.MouseDown) {
             const box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
-            if(!obstacle) box[props.id].classList.add('obstacle');
-            else box[props.id].classList.remove('obstacle');
+            if(!obstacle) {
+                set_obstacle(true);
+            }
+            else {
+                set_obstacle(false);
+            }
+            if(box[props.id].classList.contains('path')) {
+                props.clearPath();
+                props.onMouseEnter(mouseIsDown.s, mouseIsDown.f,true);
+            }
         }
-
     }
     function handleMouseUp() {
         props.onMouseDown(false);
+        props.clearPath();
+        props.onMouseEnter(mouseIsDown.s, mouseIsDown.f,true);
     }
     function handleDragStart(e: any) {
         const box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
@@ -53,7 +62,7 @@ function NodeSquare(props: any)
             set_finish(true);
         }
         box[props.id].setAttribute('draggable', 'true');
-        // props.onMouseEnter(true);
+
     }
     function handleDragOver(e: any) {
         e.preventDefault();
