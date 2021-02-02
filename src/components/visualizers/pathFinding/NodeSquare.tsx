@@ -1,4 +1,4 @@
-import { memo, useState, useContext } from 'react';
+import { memo, useState, useContext, useEffect } from 'react';
 import {mouseDownContext} from './PathFindingVisualizer';
 
 function NodeSquare(props: any)
@@ -8,6 +8,15 @@ function NodeSquare(props: any)
     const [finish, set_finish] = useState(props.isFinish);
     const [obstacle, set_obstacle] = useState(props.isObstacle);
     const classname = start ? 'node start': (finish ? 'node finish': (obstacle ? 'node obstacle': 'node'));
+
+    useEffect(() => {
+        props.clearPath();
+        props.onMouseEnter( mouseIsDown.s, props.id,true);
+    }, [finish])
+    useEffect(() => {
+        props.clearPath();
+        props.onMouseEnter(props.id, mouseIsDown.f,true);
+    }, [start])
 
     // @@@@@@@@@@@@@@@@ functions @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
     function handleMouseDown(e: any) {
