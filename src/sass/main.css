@@ -1050,9 +1050,11 @@ h6 {
 }
 
 .path {
-  background-color: turquoise;
+  background: cyan;
   opacity: 1;
   border: none;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .pathFinding-panel {

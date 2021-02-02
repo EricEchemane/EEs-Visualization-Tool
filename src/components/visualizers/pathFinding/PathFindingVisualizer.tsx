@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import NodeSquare from './NodeSquare';
 import { Box } from '@material-ui/core';
@@ -22,6 +22,10 @@ function PathFindingVisualizer()
         {id: 3, name: 'A*'}
     ])
 
+    useEffect(()=>{
+        addBorderWalls();
+    }, []);
+
     const [nodes, setNodes] = useState([] as any);
     const [start, setStart] = useState(1370);
     const [finish, setFinish] = useState(1420);
@@ -33,6 +37,7 @@ function PathFindingVisualizer()
         const hey = [] as any;
         for(let x = 0; x < 90 * 30; x++){
             hey.push(<NodeSquare
+                onMouseEnter={findThePath}
                 changeStart={handleChangeStart}
                 changeFinish={handleChangeFinish}
                 changePrev={(id: number) => {setPrevNode(id)}}
@@ -47,15 +52,35 @@ function PathFindingVisualizer()
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     function findThePath() {
-       let end = bfs(start, finish);
+        clearPath();
+       let end = bfs(finish, start);
        if(end)
         end = end?.parent;
        let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
        while(end) {
             boxes[end.data].classList.add('path');
             end = end.parent;
-            if(end?.data === start) break;
+            if(end?.data === finish) break;
        }
+    }
+    function addBorderWalls(){
+        let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+        for(let x = 0; x < 90; x++) {
+            if(boxes[x])
+                boxes[x].classList.add('obstacle');
+        }
+        for(let x = 90; x < (90 * 30); x+= 90) {
+            if(boxes[x])
+                boxes[x].classList.add('obstacle');
+        }
+        for(let x = 179; x < (90 * 30); x+= 90) {
+            if(boxes[x])
+                boxes[x].classList.add('obstacle');
+        }
+        for(let x = 90 * 29; x < (90 * 30); x++) {
+            if(boxes[x])
+                boxes[x].classList.add('obstacle');
+        }
     }
     function handleChangeStart(n: number) {
         setStart(n);
@@ -76,10 +101,17 @@ function PathFindingVisualizer()
         const value = e.target.value;
         setSpeed(value);
     }
-    function clearField() {
+    function clearObstacles() {
         let boxes = document.querySelectorAll('.obstacle');
         for(let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('obstacle');
+        }
+        addBorderWalls();
+    }
+    function clearPath() {
+        let boxes = document.querySelectorAll('.path');
+        for(let x = 0; x < boxes.length; x++) {
+            boxes[x].classList.remove('path');
         }
     }
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -126,7 +158,10 @@ function PathFindingVisualizer()
                         <input aria-label="pathfinding-speed" type="range" min={0.1} max={300} onChange={changeSpeed} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Clear field" handleClick={clearField} />
+                        <Button label="Clear Obstacles" handleClick={clearObstacles} />
+                    </Box>
+                    <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
+                        <Button label="Clear Path" handleClick={clearPath} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <ButtonAccent handleClick={findThePath} type="accent" label="Find the path!" />

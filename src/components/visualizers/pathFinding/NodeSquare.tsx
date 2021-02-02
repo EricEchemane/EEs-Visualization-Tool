@@ -23,6 +23,7 @@ function NodeSquare(props: any)
             if(!obstacle) box[props.id].classList.add('obstacle');
             else box[props.id].classList.remove('obstacle');
         }
+        props.onMouseEnter();
     }
     function handleMouseUp() {
         props.onMouseDown(false);
