@@ -5,7 +5,7 @@ import { Box } from '@material-ui/core';
 import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import { useState, useRef, useMemo } from 'react';
-import Algorithms, {bfs} from './Algorithms';
+import {bfs, node} from './Algorithms';
 
 export const mouseDownContext = createContext({} as any);
 
@@ -47,7 +47,15 @@ function PathFindingVisualizer()
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     function findThePath() {
-       bfs(start, finish);
+       let end = bfs(start, finish);
+       if(end)
+        end = end?.parent;
+       let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+       while(end) {
+            boxes[end.data].classList.add('path');
+            end = end.parent;
+            if(end?.data === start) break;
+       }
     }
     function handleChangeStart(n: number) {
         setStart(n);
