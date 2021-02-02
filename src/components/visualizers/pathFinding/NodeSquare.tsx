@@ -23,7 +23,7 @@ function NodeSquare(props: any)
             if(!obstacle) box[props.id].classList.add('obstacle');
             else box[props.id].classList.remove('obstacle');
         }
-        props.onMouseEnter();
+
     }
     function handleMouseUp() {
         props.onMouseDown(false);
@@ -53,6 +53,7 @@ function NodeSquare(props: any)
             set_finish(true);
         }
         box[props.id].setAttribute('draggable', 'true');
+        // props.onMouseEnter(true);
     }
     function handleDragOver(e: any) {
         e.preventDefault();

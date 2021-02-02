@@ -5,7 +5,7 @@ import { Box } from '@material-ui/core';
 import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import { useState, useRef, useMemo } from 'react';
-import {bfs, node} from './Algorithms';
+import Algorithms, {bfs, node} from './Algorithms';
 
 export const mouseDownContext = createContext({} as any);
 
@@ -13,7 +13,7 @@ function PathFindingVisualizer()
 {
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
     const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
-    const [speed, setSpeed] = useState(0.1);
+    const [speed, setSpeed] = useState(95);
 
     const algortihms = useRef([
         {id: 0, name: 'Breadth First Search'},
@@ -37,7 +37,7 @@ function PathFindingVisualizer()
         const hey = [] as any;
         for(let x = 0; x < 90 * 30; x++){
             hey.push(<NodeSquare
-                onMouseEnter={findThePath}
+                onMouseEnter={(b: boolean)=>{findThePath(b)}}
                 changeStart={handleChangeStart}
                 changeFinish={handleChangeFinish}
                 changePrev={(id: number) => {setPrevNode(id)}}
@@ -51,17 +51,37 @@ function PathFindingVisualizer()
     }, [start, finish]);
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    function findThePath() {
-        clearPath();
-       let end = bfs(finish, start);
-       if(end)
-        end = end?.parent;
-       let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
-       while(end) {
-            boxes[end.data].classList.add('path');
-            end = end.parent;
-            if(end?.data === finish) break;
-       }
+    function findThePath(instant?: boolean) {
+       clearPath();
+        // this will accept two array
+       let animationFrames = Algorithms(finish, start, activeAlgo.id);
+
+       animate(animationFrames[0], 'visited');
+       setTimeout(()=>{
+           animatePath(animationFrames[1]);
+       }, animationFrames[0].length * (100 - speed))
+    }
+    function animate(frames: number[], classname: string) {
+        for(let x = 0; x < frames.length; x++) {
+            if(frames[x] === start) continue;
+            changeColor(frames[x], x, classname);
+        }
+    }
+    function animatePath(frames: number[]) {
+        for(let x = 0; x < frames.length; x++) {
+            if(frames[x] === finish) continue;
+            changeColor(frames[x], x, 'path');
+        }
+    }
+    function changeColor(id: number, ms: number, classname: string) {
+        let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+        setTimeout(() =>{
+            if(classname === 'path') {
+                boxes[id].classList.remove('visited');
+                boxes[id].classList.add(classname);
+            }
+            else if (boxes[id]) boxes[id].classList.add(classname);
+        }, ms * (100 - speed));
     }
     function addBorderWalls(){
         let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
@@ -106,7 +126,6 @@ function PathFindingVisualizer()
         for(let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('obstacle');
         }
-        addBorderWalls();
     }
     function clearPath() {
         let boxes = document.querySelectorAll('.path');
@@ -114,9 +133,21 @@ function PathFindingVisualizer()
             boxes[x].classList.remove('path');
         }
     }
+    function clearVisited() {
+        let boxes = document.querySelectorAll('.visited');
+        for(let x = 0; x < boxes.length; x++) {
+            boxes[x].classList.remove('visited');
+        }
+    }
+    function resetField(){
+        clearObstacles();
+        clearPath();
+        clearVisited();
+        addBorderWalls();
+    }
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const algoOptions = algortihms.current.map((each: any) =>
-        <div key={each.id} onClick={()=>{selectAlgo(each.id)}} > {each.name} </div>
+        <div key={each.id} onClick={()=>{selectAlgo(each.id); clearVisited(); clearPath(); addBorderWalls();}} > {each.name} </div>
     )
 
     // MARK UP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -155,13 +186,10 @@ function PathFindingVisualizer()
                 <div>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <Box m={1}>Change Speed</Box>
-                        <input aria-label="pathfinding-speed" type="range" min={0.1} max={300} onChange={changeSpeed} />
+                        <input aria-label="pathfinding-speed" type="range" min={0.1} max={98} value={speed} onChange={changeSpeed} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Clear Obstacles" handleClick={clearObstacles} />
-                    </Box>
-                    <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Clear Path" handleClick={clearPath} />
+                        <Button label="Reset Field" handleClick={resetField} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <ButtonAccent handleClick={findThePath} type="accent" label="Find the path!" />

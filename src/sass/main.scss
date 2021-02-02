@@ -351,10 +351,17 @@ h6 {
   background-color: rgba(255, 255, 255, 0.8);
 }
 .path {
-  background: cyan;
+  // background: radial-gradient(orange, yellow);
+  background-color: darkorchid;
   opacity: 1;
   border: none;
   transition: 0.3s ease;
+}
+.visited {
+  transition: 0.5s;
+  background: radial-gradient(orange, yellow);
+  opacity: 1;
+  border: none;
 }
 .pathFinding-panel {
   position: absolute;

@@ -1050,11 +1050,19 @@ h6 {
 }
 
 .path {
-  background: cyan;
+  background-color: darkorchid;
   opacity: 1;
   border: none;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+}
+
+.visited {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background: radial-gradient(orange, yellow);
+  opacity: 1;
+  border: none;
 }
 
 .pathFinding-panel {
