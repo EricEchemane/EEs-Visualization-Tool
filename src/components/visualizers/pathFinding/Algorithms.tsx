@@ -52,6 +52,13 @@ export function bfs(start: number, end: number, depth?: boolean) {
             const down = data + 90;
             const up = data - 90;
             const left = data - 1;
+            if(left >= min && !visited.has(left) && !boxes[left].classList.contains('obstacle')) {
+                visited.add(left);
+                let newNode = new node(left);
+                newNode.parent = front;
+                queue.push(newNode);
+                animationFrames.push(left);
+            }
             if(right < max && !visited.has(right) && !boxes[right].classList.contains('obstacle')) {
                 visited.add(right);
                 let newNode = new node(right);
@@ -72,13 +79,6 @@ export function bfs(start: number, end: number, depth?: boolean) {
                 newNode.parent = front;
                 queue.push(newNode);
                 animationFrames.push(up);
-            }
-            if(left >= min && !visited.has(left) && !boxes[left].classList.contains('obstacle')) {
-                visited.add(left);
-                let newNode = new node(left);
-                newNode.parent = front;
-                queue.push(newNode);
-                animationFrames.push(left);
             }
 
         }

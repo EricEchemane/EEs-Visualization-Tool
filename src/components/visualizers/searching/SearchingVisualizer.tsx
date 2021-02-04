@@ -8,7 +8,7 @@ import getAnimations from './searchingAlgorithms';
 function SearchingVisualizer()
 {
    // ---> States
-   const [searchSize, setSearchSize] = useState(300)
+   const [searchSize, setSearchSize] = useState(200)
    const [searchItem, setsearchItem] = useState(-1);
    const [searchArray, setSearchArray] = useState(generateRandom(searchSize));
    const [searchSpeed, setSearchSpeed] = useState(300);
@@ -119,7 +119,7 @@ function SearchingVisualizer()
 
       animate(BINARY_ANIMATION, 'binary-bar');
       let binarySearchWorstTime = (Math.floor(Math.log2(searchArray.length)) * 2);
-      
+
       if (BINARY_ANIMATION.length === binarySearchWorstTime || BINARY_ANIMATION.length === binarySearchWorstTime+2) {
          timeouts.push(setTimeout(() => {
             setbfound(true);
