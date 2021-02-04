@@ -1,4 +1,9 @@
-# Sorting and Searching Visualizer App
+# EEs Visualizer
+
+## Covered Path Finding Algorithms
+
+- Breadth First Search
+- Depth First Search
 
 ## Covered Sorting Algorithms
 
