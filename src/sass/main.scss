@@ -307,8 +307,8 @@ h6 {
   height: 100%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(90, 1fr);
-  grid-template-rows: repeat(30, 1fr);
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(15, 1fr);
   grid-gap: 0;
   position: relative;
   background: linear-gradient(
@@ -332,36 +332,65 @@ h6 {
   opacity: 1;
   cursor: pointer;
   border: none;
-  transform: scale(2);
   border-radius: 50%;
   border: 2px solid white;
   transition: 0;
+  transform: scale(1.3);
+  animation: SCALE 1s ease;
 }
 .finish {
   background-color: crimson;
   opacity: 1;
   cursor: pointer;
   border: none;
-  transform: scale(2);
   border-radius: 50%;
   border: 2px solid white;
   transition: 0;
+  transform: scale(1.3);
+  animation: SCALE 1s ease;
+}
+@keyframes SCALE {
+  from {
+    transition: ease-in-out;
+    transform: scale(0.5);
+  }
+  to {
+    transition: ease-in-out;
+    transform: scale(1.3);
+  }
+}
+@keyframes SCALE2 {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 .obstacle {
   background-color: rgba(255, 255, 255, 0.8);
 }
 .path {
-  // background: radial-gradient(orange, yellow);
   background-color: cyan;
   opacity: 1;
   border: none;
   transition: 0.3s ease;
+  animation: path 1.5s;
+}
+@keyframes path {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: cyan;
+  }
 }
 .visited {
-  transition: 0.5s;
+  transition: 0.3s ease-in;
   background: radial-gradient(orange, yellow);
   opacity: 1;
   border: none;
+  animation: SCALE2;
 }
 .pathFinding-panel {
   position: absolute;
@@ -380,7 +409,9 @@ h6 {
   position: relative;
   justify-content: center;
 }
-
+.pulse {
+  border: 20px solid red;
+}
 //  @@@@@@@@@@@@@@@@@@@@@ MEDIA QUERY @@@@@@@@@@@@@@@@@@@@@
 @media screen and (max-width: 700px) {
   .pathFinding-panel {

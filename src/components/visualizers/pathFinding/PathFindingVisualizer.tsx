@@ -13,7 +13,7 @@ function PathFindingVisualizer() {
     let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
     const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
-    const [speed, setSpeed] = useState(96);
+    const [speed, setSpeed] = useState(93);
 
     const algortihms = useRef([
         { id: 0, name: 'Breadth First Search' },
@@ -25,15 +25,15 @@ function PathFindingVisualizer() {
     }, []);
 
     const [nodes, setNodes] = useState([] as any);
-    const [start, setStart] = useState(1370);
-    const [finish, setFinish] = useState(1420);
+    const [start, setStart] = useState(105);
+    const [finish, setFinish] = useState(645);
     const [prevNode, setPrevNode] = useState(-1);
 
     const [isMouseDown, set_isMouseDown] = useState(false);
 
     useMemo(() => {
         const hey = [] as any;
-        for (let x = 0; x < 90 * 30; x++) {
+        for (let x = 0; x < 50 * 15; x++) {
             hey.push(<NodeSquare
                 clearPath={clearPath}
                 onMouseEnter={findThePath}
@@ -53,7 +53,6 @@ function PathFindingVisualizer() {
     function findThePath(s: number, en: number, instant?: boolean) {
         if (instant) {
             let frames = Algorithms(en, s, activeAlgo.id)[1];
-
             for (let x = 0; x < frames.length; x++) {
                 if (frames[x] === finish) break;
                 if (boxes[frames[x]]) {
@@ -85,6 +84,7 @@ function PathFindingVisualizer() {
         for (let x = 0; x < frames.length; x++) {
             if (frames[x] === finish) continue;
             changeColor(frames[x], x * 4, 'path');
+
         }
     }
     function changeColor(id: number, ms: number, classname: string) {
@@ -93,25 +93,35 @@ function PathFindingVisualizer() {
                 boxes[id].classList.remove('visited');
                 boxes[id].classList.add(classname);
             }
-            else if (boxes[id]) boxes[id].classList.add(classname);
+            else if (boxes[id]) {
+                boxes[id].classList.add(classname);
+            }
         }, ms * (100 - speed));
     }
     function addBorderWalls() {
-        for (let x = 0; x < 90; x++) {
+        for (let x = 0; x < 50; x++) {
             if (boxes[x])
-                boxes[x].classList.add('obstacle');
+                boxes[x].style.transition = ".7s ease-in";
+            boxes[x].classList.add('obstacle');
+            boxes[x].style.transition = "0";
         }
-        for (let x = 90; x < (90 * 30); x += 90) {
+        for (let x = 50; x < (50 * 15); x += 50) {
             if (boxes[x])
-                boxes[x].classList.add('obstacle');
+                boxes[x].style.transition = ".7s ease-in";
+            boxes[x].classList.add('obstacle');
+            boxes[x].style.transition = "0";
         }
-        for (let x = 179; x < (90 * 30); x += 90) {
+        for (let x = 99; x < (50 * 15); x += 50) {
             if (boxes[x])
-                boxes[x].classList.add('obstacle');
+                boxes[x].style.transition = ".7s ease-in";
+            boxes[x].classList.add('obstacle');
+            boxes[x].style.transition = "0";
         }
-        for (let x = 90 * 29; x < (90 * 30); x++) {
+        for (let x = 50 * 14; x < (50 * 15); x++) {
             if (boxes[x])
-                boxes[x].classList.add('obstacle');
+                boxes[x].style.transition = ".7s ease-in";
+            boxes[x].classList.add('obstacle');
+            boxes[x].style.transition = "0";
         }
     }
     function handleChangeStart(n: number) {
@@ -159,9 +169,9 @@ function PathFindingVisualizer() {
         clearObstacles();
         addBorderWalls();
         clearPath();
-        for (let x = 0; x < 90 * 30; x++) {
+        for (let x = 0; x < 50 * 15; x++) {
             if (boxes[x] && !(boxes[x].classList.contains('obstacle')) && !(boxes[x].classList.contains('finish')) && !(boxes[x].classList.contains('start'))) {
-                if (Math.floor(Math.random() * 50) < 17)
+                if (Math.floor(Math.random() * 50) < 13)
                     boxes[x].classList.add('obstacle');
             }
         }

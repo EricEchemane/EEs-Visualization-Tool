@@ -1,6 +1,5 @@
-import { memo, useState, useContext, useEffect } from 'react';
+import { memo, useState, useContext, useEffect, useRef } from 'react';
 import { mouseDownContext } from './PathFindingVisualizer';
-let first = true;
 
 function NodeSquare(props: any) {
     const mouseIsDown = useContext(mouseDownContext);
@@ -8,6 +7,7 @@ function NodeSquare(props: any) {
     const [finish, set_finish] = useState(props.isFinish);
     const [obstacle, set_obstacle] = useState(props.isObstacle);
     const classname = start ? 'node start' : (finish ? 'node finish' : (obstacle ? 'node obstacle' : 'node'));
+    const first = useRef(true);
 
     let box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
 
@@ -15,39 +15,37 @@ function NodeSquare(props: any) {
         box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
         props.clearPath();
         props.onMouseEnter(mouseIsDown.s, props.id, true);
-    }, [finish])
+    }, [finish]);
+
     useEffect(() => {
         box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
         props.clearPath();
         props.onMouseEnter(props.id, mouseIsDown.f, true);
-    }, [start])
-    useEffect(() => {
-        if (first) {
-            first = false;
-        } else {
-            props.clearPath();
-            props.onMouseEnter(mouseIsDown.s, mouseIsDown.f, true);
-        }
-    }, [obstacle]);
+    }, [start]);
 
     // @@@@@@@@@@@@@@@@ functions @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
     function handleMouseDown(e: any) {
         if (start || finish) return;
         e.preventDefault();
+        box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+        let obs = box[props.id].classList.contains('obstacle');
+        if (obs) box[props.id].classList.remove('obstacle');
+        else box[props.id].classList.add('obstacle');
+        props.clearPath();
+        props.onMouseEnter(mouseIsDown.s, mouseIsDown.f, true);
         props.onMouseDown(true);
-        set_obstacle((prev: any) => {
-            return !prev;
-        });
-
     }
-    function handleMouseEnter() {
+
+    function handleMouseEnter(e: any) {
+        e.preventDefault();
         if (start || finish) return;
         if (mouseIsDown.MouseDown) {
-            if (!obstacle) {
-                set_obstacle(true);
-            } else {
-                set_obstacle(false);
-            }
+            box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
+            let obs = box[props.id].classList.contains('obstacle');
+            if (obs) box[props.id].classList.remove('obstacle');
+            else box[props.id].classList.add('obstacle');
+            props.clearPath();
+            props.onMouseEnter(mouseIsDown.s, mouseIsDown.f, true);
         }
     }
     function handleMouseUp() {
@@ -55,10 +53,6 @@ function NodeSquare(props: any) {
     }
     function handleDragStart(e: any) {
         box[props.id].setAttribute('draggable', 'false');
-        box[props.id].addEventListener('ondrop', () => {
-            set_start(false);
-            set_finish(false);
-        })
         props.changePrev(props.id);
     }
     function handleOnDrop(e: any) {
