@@ -5,9 +5,7 @@ function NodeSquare(props: any) {
     const mouseIsDown = useContext(mouseDownContext);
     const [start, set_start] = useState(props.isStart);
     const [finish, set_finish] = useState(props.isFinish);
-    const [obstacle, set_obstacle] = useState(props.isObstacle);
-    const classname = start ? 'node start' : (finish ? 'node finish' : (obstacle ? 'node obstacle' : 'node'));
-    const first = useRef(true);
+    const classname = start ? 'node start' : (finish ? 'node finish' : 'node');
 
     let box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
 
@@ -70,7 +68,6 @@ function NodeSquare(props: any) {
             set_finish(true);
         }
         box[props.id].setAttribute('draggable', 'true');
-
     }
     function handleDragOver(e: any) {
         e.preventDefault();

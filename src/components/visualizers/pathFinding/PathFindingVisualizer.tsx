@@ -47,12 +47,12 @@ function PathFindingVisualizer() {
                 key={x} />)
         }
         setNodes(hey);
-    }, [start, finish]);
+    }, [start, finish, activeAlgo]);
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     function findThePath(s: number, en: number, instant?: boolean) {
         if (instant) {
-            let frames = Algorithms(en, s, activeAlgo.id)[1];
+            const frames = Algorithms(en, s, activeAlgo.id)[1];
             for (let x = 0; x < frames.length; x++) {
                 if (frames[x] === finish) break;
                 if (boxes[frames[x]]) {

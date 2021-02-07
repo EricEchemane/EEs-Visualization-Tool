@@ -1167,10 +1167,6 @@ h6 {
           justify-content: center;
 }
 
-.pulse {
-  border: 20px solid red;
-}
-
 @media screen and (max-width: 700px) {
   .pathFinding-panel {
     overflow-x: scroll;
