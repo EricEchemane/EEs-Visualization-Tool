@@ -84,7 +84,9 @@ function PathFindingVisualizer() {
         for (let x = 0; x < frames.length; x++) {
             if (frames[x] === finish) continue;
             changeColor(frames[x], x * 4, 'path');
-
+        }
+        if (boxes[frames[frames.length - 1]] === undefined) {
+            alert('There is no possible path.');
         }
     }
     function changeColor(id: number, ms: number, classname: string) {
@@ -101,27 +103,23 @@ function PathFindingVisualizer() {
     function addBorderWalls() {
         for (let x = 0; x < 50; x++) {
             if (boxes[x])
-                boxes[x].style.transition = ".7s ease-in";
+                boxes[x].style.transition = ".1s ease-in";
             boxes[x].classList.add('obstacle');
-            boxes[x].style.transition = "0";
         }
         for (let x = 50; x < (50 * 15); x += 50) {
             if (boxes[x])
-                boxes[x].style.transition = ".7s ease-in";
+                boxes[x].style.transition = ".1s ease-in";
             boxes[x].classList.add('obstacle');
-            boxes[x].style.transition = "0";
         }
         for (let x = 99; x < (50 * 15); x += 50) {
             if (boxes[x])
-                boxes[x].style.transition = ".7s ease-in";
+                boxes[x].style.transition = ".1s ease-in";
             boxes[x].classList.add('obstacle');
-            boxes[x].style.transition = "0";
         }
         for (let x = 50 * 14; x < (50 * 15); x++) {
             if (boxes[x])
-                boxes[x].style.transition = ".7s ease-in";
+                boxes[x].style.transition = ".1s ease-in";
             boxes[x].classList.add('obstacle');
-            boxes[x].style.transition = "0";
         }
     }
     function handleChangeStart(n: number) {
@@ -159,10 +157,17 @@ function PathFindingVisualizer() {
             boxes[x].classList.remove('visited');
         }
     }
+    function clearWeights() {
+        let boxes = document.querySelectorAll('.weight');
+        for (let x = 0; x < boxes.length; x++) {
+            boxes[x].classList.remove('weight');
+        }
+    }
     function resetField() {
         clearObstacles();
         clearPath();
         clearVisited();
+        clearWeights();
         addBorderWalls();
     }
     function generateWalls() {
@@ -178,7 +183,10 @@ function PathFindingVisualizer() {
     }
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const algoOptions = algortihms.current.map((each: any) =>
-        <div key={each.id} onClick={() => { selectAlgo(each.id) }} > {each.name} </div>
+        <div key={each.id} onClick={() => {
+            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none"
+            selectAlgo(each.id);
+        }} > {each.name} </div>
     )
 
     // MARK UP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -226,7 +234,14 @@ function PathFindingVisualizer() {
                         <Button label="Generate Random Walls" handleClick={generateWalls} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <ButtonAccent handleClick={() => { findThePath(start, finish, false) }} type="accent" label="Find the path!" />
+                        <ButtonAccent handleClick={() => {
+                            if (activeAlgo.id === -1) {
+                                (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "2px solid red"
+                                return;
+                            }
+                            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none"
+                            findThePath(start, finish, false);
+                        }} type="accent" label="Find the path!" />
                     </Box>
                 </div>
             </div>

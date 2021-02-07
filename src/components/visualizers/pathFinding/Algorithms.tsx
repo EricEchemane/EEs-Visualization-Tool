@@ -1,5 +1,3 @@
-import { stat } from "fs";
-
 const min = 0;
 const max = (50 * 15) - 1;
 const BFS = 0;
@@ -14,6 +12,7 @@ export class node {
     }
 }
 export default function Algorithms(start: number, end: number, animationId: number) {
+
     animationFrames = [];
     let pathAnimation = [] as any;
     let pathStart;
@@ -21,12 +20,11 @@ export default function Algorithms(start: number, end: number, animationId: numb
     else if (animationId === DFS) pathStart = bfs(start, end, true);
 
     pathStart = pathStart?.parent;
+
     while (pathStart != undefined) {
         pathAnimation.push(pathStart.data);
         pathStart = pathStart.parent;
-        if (pathStart?.data === end) break;
     }
-
     return [animationFrames, pathAnimation];
 }
 

@@ -27,8 +27,16 @@ function NodeSquare(props: any) {
         e.preventDefault();
         box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
         let obs = box[props.id].classList.contains('obstacle');
-        if (obs) box[props.id].classList.remove('obstacle');
-        else box[props.id].classList.add('obstacle');
+        if (e.ctrlKey) {
+            const weighted = box[props.id].classList.contains('weight');
+            if (weighted) box[props.id].classList.remove('weight');
+            else box[props.id].classList.add('weight');
+        }
+        else {
+            if (obs) box[props.id].classList.remove('obstacle');
+            else box[props.id].classList.add('obstacle');
+        }
+
         props.clearPath();
         props.onMouseEnter(mouseIsDown.s, mouseIsDown.f, true);
         props.onMouseDown(true);
@@ -40,8 +48,15 @@ function NodeSquare(props: any) {
         if (mouseIsDown.MouseDown) {
             box = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
             let obs = box[props.id].classList.contains('obstacle');
-            if (obs) box[props.id].classList.remove('obstacle');
-            else box[props.id].classList.add('obstacle');
+            if (e.ctrlKey) {
+                const weighted = box[props.id].classList.contains('weight');
+                if (weighted) box[props.id].classList.remove('weight');
+                else box[props.id].classList.add('weight');
+            }
+            else {
+                if (obs) box[props.id].classList.remove('obstacle');
+                else box[props.id].classList.add('obstacle');
+            }
             props.clearPath();
             props.onMouseEnter(mouseIsDown.s, mouseIsDown.f, true);
         }
