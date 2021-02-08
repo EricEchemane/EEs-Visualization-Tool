@@ -6,6 +6,7 @@ import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import { useState, useRef, useMemo } from 'react';
 import Algorithms, { bfs, node } from './Algorithms';
+import { stat } from 'fs';
 
 export const mouseDownContext = createContext({} as any);
 
@@ -86,7 +87,11 @@ function PathFindingVisualizer() {
             changeColor(frames[x], x * 4, 'path');
         }
         if (boxes[frames[frames.length - 1]] === undefined) {
-            alert('There is no possible path.');
+            let x = window.confirm('There is no possible path. Generate random walls then find?');
+            if (x) {
+                generateWalls();
+                findThePath(start, finish);
+            }
         }
     }
     function changeColor(id: number, ms: number, classname: string) {
@@ -176,7 +181,7 @@ function PathFindingVisualizer() {
         clearPath();
         for (let x = 0; x < 50 * 15; x++) {
             if (boxes[x] && !(boxes[x].classList.contains('obstacle')) && !(boxes[x].classList.contains('finish')) && !(boxes[x].classList.contains('start'))) {
-                if (Math.floor(Math.random() * 50) < 13)
+                if (Math.floor(Math.random() * 50) < 14)
                     boxes[x].classList.add('obstacle');
             }
         }
@@ -188,6 +193,19 @@ function PathFindingVisualizer() {
             selectAlgo(each.id);
         }} > {each.name} </div>
     )
+    function isObstacle(index: number) {
+        return (boxes[index] !== undefined && boxes[index].classList.contains('obstacle'));
+    }
+
+    function createMaze(start: number, length: number, height: number, first?: boolean) {
+
+        if (first) {
+            clearObstacles();
+            addBorderWalls();
+        }
+    }
+
+
 
     // MARK UP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     return (
@@ -231,7 +249,10 @@ function PathFindingVisualizer() {
                         <Button label="Reset Field" handleClick={resetField} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Generate Random Walls" handleClick={generateWalls} />
+                        <Button label="Random Walls" handleClick={generateWalls} />
+                    </Box>
+                    <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
+                        <Button label="Create Maze" handleClick={() => { createMaze(51, 48, 13, true); }} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <ButtonAccent handleClick={() => {
