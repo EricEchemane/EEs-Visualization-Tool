@@ -87,13 +87,10 @@ function PathFindingVisualizer() {
             changeColor(frames[x], x * 4, 'path');
         }
         if (boxes[frames[frames.length - 1]] === undefined) {
-            let x = window.confirm('There is no possible path. Generate random walls then find?');
-            if (x) {
-                generateWalls();
-                findThePath(start, finish);
-            }
+            window.alert('There is no possible path.');
         }
     }
+
     function changeColor(id: number, ms: number, classname: string) {
         setTimeout(() => {
             if (classname === 'path') {
@@ -193,18 +190,60 @@ function PathFindingVisualizer() {
             selectAlgo(each.id);
         }} > {each.name} </div>
     )
+    
     function isObstacle(index: number) {
         return (boxes[index] !== undefined && boxes[index].classList.contains('obstacle'));
     }
+    function makeObstacle(index: number) {
+        if(boxes[index] && !(boxes[index].classList.contains('finish')) && !(boxes[index].classList.contains('start'))) boxes[index].classList.add('obstacle');
+    }
 
     function createMaze(start: number, length: number, height: number, first?: boolean) {
-
+        if(length < 3 || height < 3) return;
         if (first) {
+            clearPath();
             clearObstacles();
             addBorderWalls();
         }
-    }
 
+        let halfLen = Math.floor(length / 2);
+        let halfHeight = Math.floor(height / 2);
+
+        // horizontal mid node
+        let lmid = start + halfLen;
+        // vertical mid node
+        let hmid = start + (50 * halfHeight);
+
+        let randomX = Math.floor( Math.random() * halfHeight + 1);
+        for(let x = 0; x < halfHeight; x++) {
+            if(x === randomX || x === randomX - 1) continue;
+            makeObstacle(lmid + (50 * x));
+        }
+        let remainingY = (height - halfHeight);
+        randomX = Math.floor( Math.random() * remainingY );
+        for(let x = 0; x < remainingY; x++) {
+            if(x === randomX || x === randomX - 1) continue;
+            makeObstacle((lmid + (50*halfHeight) + (x*50)));
+        }
+
+        let randomY = Math.floor( Math.random() * halfLen + 1);
+
+        for(let x = 0; x < halfLen; x++) {
+            if(x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
+            makeObstacle(hmid + x);
+        }
+        let remainingX = length - halfLen;
+        randomY = Math.floor( Math.random() * remainingX );
+        for(let x = 0; x < remainingX; x++) {
+            if(x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
+            makeObstacle(hmid + x + halfLen);
+        }
+
+        createMaze(start, halfLen, halfHeight);
+        createMaze(start + halfLen - 1, remainingX, halfHeight);
+        createMaze(hmid + 100, halfLen, remainingY);
+        createMaze(hmid + 100 + halfLen, remainingX, remainingY);
+    }
 
 
     // MARK UP @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
