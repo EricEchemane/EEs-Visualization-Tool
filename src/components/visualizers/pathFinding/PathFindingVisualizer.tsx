@@ -98,6 +98,7 @@ function PathFindingVisualizer() {
                 boxes[id].classList.add(classname);
             }
             else if (boxes[id]) {
+                if(id === finish) return;
                 boxes[id].classList.add(classname);
             }
         }, ms * (100 - speed));

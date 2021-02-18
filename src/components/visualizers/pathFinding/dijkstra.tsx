@@ -28,9 +28,9 @@ function getNeighbors(index: number) {
     const left = index - 1;
     const neighbors = [] as any[];
 
-    if(up >= 51 && !isObstacle(up)) neighbors.push(nodes[up]);
-    if(down < (50 * 14) && !isObstacle(down)) neighbors.push(nodes[down]);
     if(right < (50 * 14) && !isObstacle(right)) neighbors.push(nodes[right]);
+    if(down < (50 * 14) && !isObstacle(down)) neighbors.push(nodes[down]);
+    if(up >= 51 && !isObstacle(up)) neighbors.push(nodes[up]);
     if(left >= 51 && !isObstacle(left)) neighbors.push(nodes[left]);
 
     return neighbors;
@@ -81,8 +81,6 @@ export const dijkstra = (startIdx: number, goalIdx: number) => {
                 let curNode = neighbors[x];
                 let curNodeID = parseInt(curNode.id);
 
-                if(visited[curNodeID]) continue;
-
                 frames.push(curNodeID);
 
                 let curDistance = getDistance(curNodeID);
@@ -98,9 +96,11 @@ export const dijkstra = (startIdx: number, goalIdx: number) => {
                     return [frames,
                     backTrack(curNodeID)];
                 }
-
-                queue.push(curNode);
-                visited[curNodeID] = true;
+                if(visited[curNodeID]) continue;
+                else{
+                    queue.push(curNode);
+                    visited[curNodeID] = true;
+                }
             }
             visited[curID] = true;
         }
