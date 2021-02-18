@@ -1,8 +1,13 @@
+import {dijkstra} from './dijkstra';
+
 const min = 0;
 const max = (50 * 15) - 1;
 const BFS = 0;
 const DFS = 1;
+const DIJKSTRA = 2;
+
 let animationFrames = [] as any;
+
 export class node {
     data: number;
     parent?: node;
@@ -18,6 +23,10 @@ export default function Algorithms(start: number, end: number, animationId: numb
     let pathStart;
     if (animationId === BFS) pathStart = bfs(start, end);
     else if (animationId === DFS) pathStart = bfs(start, end, true);
+    else if (animationId === DIJKSTRA) {
+        let frames = dijkstra(start, end);
+        return frames;
+    }
 
     pathStart = pathStart?.parent;
 
@@ -78,7 +87,6 @@ export function bfs(start: number, end: number, depth?: boolean) {
                 queue.push(newNode);
                 animationFrames.push(up);
             }
-
         }
     }
 }

@@ -63,6 +63,10 @@ function NodeSquare(props: any) {
     }
     function handleMouseUp() {
         props.onMouseDown(false);
+        if(mouseIsDown.prev === props.id) {
+            console.log(box[props.id]);
+            console.log(box[props.id + 1]);
+        }
     }
     function handleDragStart(e: any) {
         box[props.id].setAttribute('draggable', 'false');
@@ -97,7 +101,8 @@ function NodeSquare(props: any) {
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             draggable={start || finish}
-            className={classname}>
+            className={classname}
+            id={props.id}>
         </div>
     )
 }

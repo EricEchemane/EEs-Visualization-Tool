@@ -6,7 +6,6 @@ import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
 import { useState, useRef, useMemo } from 'react';
 import Algorithms, { bfs, node } from './Algorithms';
-import { stat } from 'fs';
 
 export const mouseDownContext = createContext({} as any);
 
@@ -19,6 +18,7 @@ function PathFindingVisualizer() {
     const algortihms = useRef([
         { id: 0, name: 'Breadth First Search' },
         { id: 1, name: 'Depth First Search' },
+        { id: 2, name: 'Dijkstra\'s Algorithm'},
     ])
 
     useEffect(() => {
@@ -191,15 +191,15 @@ function PathFindingVisualizer() {
         }} > {each.name} </div>
     )
     
-    function isObstacle(index: number) {
-        return (boxes[index] !== undefined && boxes[index].classList.contains('obstacle'));
-    }
+    // function isObstacle(index: number) {
+    //     return (boxes[index] !== undefined && boxes[index].classList.contains('obstacle'));
+    // }
     function makeObstacle(index: number) {
         if(boxes[index] && !(boxes[index].classList.contains('finish')) && !(boxes[index].classList.contains('start'))) boxes[index].classList.add('obstacle');
     }
 
     function createMaze(start: number, length: number, height: number, first?: boolean) {
-        if(length < 3 || height < 3) return;
+        if(length < 2 || height < 3) return;
         if (first) {
             clearPath();
             clearObstacles();
@@ -301,7 +301,7 @@ function PathFindingVisualizer() {
                             }
                             (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none"
                             findThePath(start, finish, false);
-                        }} type="accent" label="Find the path!" />
+                        }} type="error" label="Find the path!" />
                     </Box>
                 </div>
             </div>
