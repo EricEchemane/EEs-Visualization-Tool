@@ -1105,6 +1105,8 @@ h6 {
 
 .obstacle {
   background-color: rgba(255, 255, 255, 0.8);
+  -webkit-animation: weight 0.4s ease-in-out;
+          animation: weight 0.4s ease-in-out;
 }
 
 .path {
@@ -1170,12 +1172,13 @@ h6 {
 }
 
 .weight {
-  opacity: 0.6;
+  opacity: 0.5;
   border: none;
   background: url(../assets/weight.png);
   background-size: 60%;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: cyan;
   -webkit-animation: weight 0.4s ease-in-out;
           animation: weight 0.4s ease-in-out;
 }

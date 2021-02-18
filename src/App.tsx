@@ -10,7 +10,7 @@ import './sass/main.css';
 
 function App() {
 
-   const [currentOpenTab, set_currentOpenTab] = useState(2);
+   const [currentOpenTab, set_currentOpenTab] = useState(0);
 
    function changeTab(n: number) {
       set_currentOpenTab(n);

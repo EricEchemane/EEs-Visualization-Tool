@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 export default function AppBar(props: any) {
 
-   const [activeTab, set_activeTab] = useState(2);
+   const [activeTab, set_activeTab] = useState(0);
 
    function activeTabIndicator(n: number) {
       set_activeTab(n);

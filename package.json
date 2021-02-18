@@ -1,6 +1,7 @@
 {
   "name": "visualizer",
   "version": "0.1.0",
+  "homepage": "https://ericechemane.github.io/EEs-Visualization-Tool",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -13,6 +14,7 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "@types/react-router": "^5.1.11",
+    "gh-pages": "^3.1.0",
     "npm-install-missing": "^0.1.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -24,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

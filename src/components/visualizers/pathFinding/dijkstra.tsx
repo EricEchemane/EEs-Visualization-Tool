@@ -38,23 +38,6 @@ function getNeighbors(index: number) {
 function setParent(index: number, parent: string) {
     nodes[index].setAttribute('data-parent', parent);
 }
-function getNearestNode(neighbors: any[]) {
-    let nearestNode = neighbors[0];
-    let shortestDistance = 1000;
-    if(nearestNode)
-        shortestDistance = getDistance(parseInt(nearestNode.id));
-
-    for (let x = 1; x < neighbors.length; x++) {
-        let curId = neighbors[x].id;
-        let curDistance = getDistance(parseInt(curId));
-        if(curDistance < shortestDistance) {
-            shortestDistance = curDistance;
-            nearestNode = neighbors[x];
-        }
-    }
-    return nearestNode;
-}
-
 function getParent(index: number) {
     let parentIndex;
 
