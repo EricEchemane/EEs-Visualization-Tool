@@ -167,6 +167,7 @@ function PathFindingVisualizer () {
         }
     }
     function resetField () {
+        setActiveAlgo({id: -1, name: "Choose Algorithm"});
         clearObstacles();
         clearPath();
         clearVisited();
