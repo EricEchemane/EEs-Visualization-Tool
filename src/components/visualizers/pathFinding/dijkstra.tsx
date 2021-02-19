@@ -1,58 +1,58 @@
 
 const nodes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
 
-function resetNodes(){
-    for(let x = 0; x < (50*15); x++) {
+function resetNodes () {
+    for (let x = 0; x < (50 * 15); x++) {
         nodes[x].setAttribute('data-distance', '1000');
         nodes[x].setAttribute('data-parent', 'none');
     }
 }
-function setDistance(index: number, distance: number) {
+function setDistance (index: number, distance: number) {
     nodes[index].setAttribute('data-distance', distance.toString());
 }
-function getDistance(index: number): number {
+function getDistance (index: number): number {
     const distance = nodes[index].getAttribute('data-distance');
-    if(distance) return parseInt(distance);
+    if (distance) return parseInt(distance);
     return 1000;
 }
-function isObstacle(index: number) {
+function isObstacle (index: number) {
     return nodes[index].classList.contains('obstacle');
 }
-function isWeighted(index: number) {
+function isWeighted (index: number) {
     return nodes[index].classList.contains('weight');
 }
-function getNeighbors(index: number) {
+function getNeighbors (index: number) {
     const up = index - 50;
     const down = index + 50;
     const right = index + 1;
     const left = index - 1;
     const neighbors = [] as any[];
 
-    if(right < (50 * 14) && !isObstacle(right)) neighbors.push(nodes[right]);
-    if(down < (50 * 14) && !isObstacle(down)) neighbors.push(nodes[down]);
-    if(up >= 51 && !isObstacle(up)) neighbors.push(nodes[up]);
-    if(left >= 51 && !isObstacle(left)) neighbors.push(nodes[left]);
+    if (down < (50 * 14) && !isObstacle(down)) neighbors.push(nodes[down]);
+    if (right < (50 * 14) && !isObstacle(right)) neighbors.push(nodes[right]);
+    if (left >= 51 && !isObstacle(left)) neighbors.push(nodes[left]);
+    if (up >= 51 && !isObstacle(up)) neighbors.push(nodes[up]);
 
     return neighbors;
 }
-function setParent(index: number, parent: string) {
+function setParent (index: number, parent: string) {
     nodes[index].setAttribute('data-parent', parent);
 }
-function getParent(index: number) {
+function getParent (index: number) {
     let parentIndex;
 
-    if(nodes[index]){
+    if (nodes[index]) {
         parentIndex = nodes[index].getAttribute('data-parent');
     }
     return parentIndex;
 }
 
-function backTrack(index: number) {
+function backTrack (index: number) {
     let frames = [] as any[];
     let parentIndex = getParent(index);
-    while(parentIndex !== 'none') {
+    while (parentIndex !== 'none') {
         let x = 0;
-        if(parentIndex)
+        if (parentIndex)
             x = parseInt(parentIndex);
         frames.push(x);
         parentIndex = getParent(x);
@@ -69,9 +69,9 @@ export const dijkstra = (startIdx: number, goalIdx: number) => {
     let queue = [nodes[startIdx]];
     let frames = [] as number[];
 
-    while(queue.length > 0) {
+    while (queue.length > 0) {
         let curNode = queue.shift();
-        if(curNode) {
+        if (curNode) {
             const curID = parseInt(curNode.id);
 
             let neighbors = getNeighbors(curID);
@@ -81,25 +81,24 @@ export const dijkstra = (startIdx: number, goalIdx: number) => {
                 let curNode = neighbors[x];
                 let curNodeID = parseInt(curNode.id);
 
-                frames.push(curNodeID);
-
                 let curDistance = getDistance(curNodeID);
-                let add = isWeighted(curNodeID) ? 2:1;
+                let add = isWeighted(curNodeID) ? 2 : 1;
                 let newDistance = getDistance(curID) + add;
 
-                if(newDistance < curDistance) {
+                if (newDistance < curDistance) {
                     setDistance(curNodeID, newDistance);
                     setParent(curNodeID, curID.toString());
                 }
 
-                if(curNodeID === goalIdx) {
+                if (curNodeID === goalIdx) {
                     return [frames,
-                    backTrack(curNodeID)];
+                        backTrack(curNodeID)];
                 }
-                if(visited[curNodeID]) continue;
-                else{
+                if (visited[curNodeID]) continue;
+                else {
                     queue.push(curNode);
                     visited[curNodeID] = true;
+                    frames.push(curNodeID);
                 }
             }
             visited[curID] = true;
@@ -107,4 +106,4 @@ export const dijkstra = (startIdx: number, goalIdx: number) => {
     }
 
     return [frames, []];
-}
+};

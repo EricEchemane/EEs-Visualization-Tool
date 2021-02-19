@@ -1,25 +1,25 @@
-import React, { createContext, useEffect } from 'react';
+import React, {createContext, useEffect} from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import NodeSquare from './NodeSquare';
-import { Box } from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import Button from '../../buttons/Button';
 import ButtonAccent from '../../buttons/ButtonAccent';
-import { useState, useRef, useMemo } from 'react';
-import Algorithms, { bfs, node } from './Algorithms';
+import {useState, useRef, useMemo} from 'react';
+import Algorithms, {bfs, node} from './Algorithms';
 
 export const mouseDownContext = createContext({} as any);
 
-function PathFindingVisualizer() {
+function PathFindingVisualizer () {
     let boxes = (document.getElementsByClassName('node') as HTMLCollectionOf<HTMLElement>);
     const [algoOptionsDropdown, set_algoOptionsDropdown] = useState(false);
-    const [activeAlgo, setActiveAlgo] = useState({ id: -1, name: 'Choose Algorithm' });
+    const [activeAlgo, setActiveAlgo] = useState({id: -1, name: 'Choose Algorithm'});
     const [speed, setSpeed] = useState(93);
 
     const algortihms = useRef([
-        { id: 0, name: 'Breadth First Search' },
-        { id: 1, name: 'Depth First Search' },
-        { id: 2, name: 'Dijkstra\'s Algorithm'},
-    ])
+        {id: 0, name: 'Breadth First Search'},
+        {id: 1, name: 'Depth First Search'},
+        {id: 2, name: 'Dijkstra\'s Algorithm'},
+    ]);
 
     useEffect(() => {
         addBorderWalls();
@@ -40,18 +40,18 @@ function PathFindingVisualizer() {
                 onMouseEnter={findThePath}
                 changeStart={handleChangeStart}
                 changeFinish={handleChangeFinish}
-                changePrev={(id: number) => { setPrevNode(id) }}
-                onMouseDown={(b: boolean) => { set_isMouseDown(b) }}
+                changePrev={(id: number) => {setPrevNode(id);}}
+                onMouseDown={(b: boolean) => {set_isMouseDown(b);}}
                 isStart={x === start}
                 isFinish={x === finish}
                 id={x}
-                key={x} />)
+                key={x} />);
         }
         setNodes(hey);
     }, [start, finish, activeAlgo]);
 
     // FUNCTIONS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    function findThePath(s: number, en: number, instant?: boolean) {
+    function findThePath (s: number, en: number, instant?: boolean) {
         if (instant) {
             const frames = Algorithms(en, s, activeAlgo.id)[1];
             for (let x = 0; x < frames.length; x++) {
@@ -72,16 +72,16 @@ function PathFindingVisualizer() {
             setTimeout(() => {
                 clearVisited();
             }, animationFrames[1].length * (120 - speed));
-        }, animationFrames[0].length * (100 - speed))
+        }, animationFrames[0].length * (100 - speed));
     }
 
-    function animate(frames: number[], classname: string) {
+    function animate (frames: number[], classname: string) {
         for (let x = 0; x < frames.length; x++) {
             if (frames[x] === start) continue;
             changeColor(frames[x], x, classname);
         }
     }
-    function animatePath(frames: number[]) {
+    function animatePath (frames: number[]) {
         for (let x = 0; x < frames.length; x++) {
             if (frames[x] === finish) continue;
             changeColor(frames[x], x * 4, 'path');
@@ -91,19 +91,19 @@ function PathFindingVisualizer() {
         }
     }
 
-    function changeColor(id: number, ms: number, classname: string) {
+    function changeColor (id: number, ms: number, classname: string) {
         setTimeout(() => {
             if (classname === 'path') {
                 boxes[id].classList.remove('visited');
                 boxes[id].classList.add(classname);
             }
             else if (boxes[id]) {
-                if(id === finish) return;
+                if (id === finish) return;
                 boxes[id].classList.add(classname);
             }
         }, ms * (100 - speed));
     }
-    function addBorderWalls() {
+    function addBorderWalls () {
         for (let x = 0; x < 50; x++) {
             if (boxes[x])
                 boxes[x].style.transition = ".1s ease-in";
@@ -125,55 +125,55 @@ function PathFindingVisualizer() {
             boxes[x].classList.add('obstacle');
         }
     }
-    function handleChangeStart(n: number) {
+    function handleChangeStart (n: number) {
         setStart(n);
     }
-    function handleChangeFinish(n: number) {
+    function handleChangeFinish (n: number) {
         setFinish(n);
     }
     const ShowAlgoOptionsDropdown = () => {
         set_algoOptionsDropdown((prev: boolean) => !prev);
-    }
+    };
     const selectAlgo = (id: number) => {
         setActiveAlgo(algortihms.current[id]);
         set_algoOptionsDropdown(false);
-    }
-    function changeSpeed(e: any) {
+    };
+    function changeSpeed (e: any) {
         const value = e.target.value;
         setSpeed(value);
     }
-    function clearObstacles() {
+    function clearObstacles () {
         let boxes = document.querySelectorAll('.obstacle');
         for (let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('obstacle');
         }
     }
-    function clearPath() {
+    function clearPath () {
         let boxes = document.querySelectorAll('.path');
         for (let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('path');
         }
     }
-    function clearVisited() {
+    function clearVisited () {
         let boxes = document.querySelectorAll('.visited');
         for (let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('visited');
         }
     }
-    function clearWeights() {
+    function clearWeights () {
         let boxes = document.querySelectorAll('.weight');
         for (let x = 0; x < boxes.length; x++) {
             boxes[x].classList.remove('weight');
         }
     }
-    function resetField() {
+    function resetField () {
         clearObstacles();
         clearPath();
         clearVisited();
         clearWeights();
         addBorderWalls();
     }
-    function generateWalls() {
+    function generateWalls () {
         clearObstacles();
         addBorderWalls();
         clearPath();
@@ -187,20 +187,20 @@ function PathFindingVisualizer() {
     // OTHER VARIABLES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     const algoOptions = algortihms.current.map((each: any) =>
         <div key={each.id} onClick={() => {
-            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none"
+            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none";
             selectAlgo(each.id);
         }} > {each.name} </div>
-    )
-    
+    );
+
     // function isObstacle(index: number) {
     //     return (boxes[index] !== undefined && boxes[index].classList.contains('obstacle'));
     // }
-    function makeObstacle(index: number) {
-        if(boxes[index] && !(boxes[index].classList.contains('finish')) && !(boxes[index].classList.contains('start'))) boxes[index].classList.add('obstacle');
+    function makeObstacle (index: number) {
+        if (boxes[index] && !(boxes[index].classList.contains('finish')) && !(boxes[index].classList.contains('start'))) boxes[index].classList.add('obstacle');
     }
 
-    function createMaze(start: number, length: number, height: number, first?: boolean) {
-        if(length < 2 || height < 3) return;
+    function createMaze (start: number, length: number, height: number, first?: boolean) {
+        if (length < 2 || height < 3) return;
         if (first) {
             clearPath();
             clearObstacles();
@@ -215,28 +215,28 @@ function PathFindingVisualizer() {
         // vertical mid node
         let hmid = start + (50 * halfHeight);
 
-        let randomX = Math.floor( Math.random() * halfHeight + 1);
-        for(let x = 0; x < halfHeight; x++) {
-            if(x === randomX || x === randomX - 1) continue;
+        let randomX = Math.floor(Math.random() * halfHeight + 1);
+        for (let x = 0; x < halfHeight; x++) {
+            if (x === randomX || x === randomX - 1) continue;
             makeObstacle(lmid + (50 * x));
         }
         let remainingY = (height - halfHeight);
-        randomX = Math.floor( Math.random() * remainingY );
-        for(let x = 0; x < remainingY; x++) {
-            if(x === randomX || x === randomX - 1) continue;
-            makeObstacle((lmid + (50*halfHeight) + (x*50)));
+        randomX = Math.floor(Math.random() * remainingY);
+        for (let x = 0; x < remainingY; x++) {
+            if (x === randomX || x === randomX - 1) continue;
+            makeObstacle((lmid + (50 * halfHeight) + (x * 50)));
         }
 
-        let randomY = Math.floor( Math.random() * halfLen + 1);
+        let randomY = Math.floor(Math.random() * halfLen + 1);
 
-        for(let x = 0; x < halfLen; x++) {
-            if(x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
+        for (let x = 0; x < halfLen; x++) {
+            if (x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
             makeObstacle(hmid + x);
         }
         let remainingX = length - halfLen;
-        randomY = Math.floor( Math.random() * remainingX );
-        for(let x = 0; x < remainingX; x++) {
-            if(x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
+        randomY = Math.floor(Math.random() * remainingX);
+        for (let x = 0; x < remainingX; x++) {
+            if (x === randomY || randomY - 1 === x || randomY + 1 === x) continue;
             makeObstacle(hmid + x + halfLen);
         }
 
@@ -272,7 +272,7 @@ function PathFindingVisualizer() {
             </div>
 
             <div className="search-field">
-                <mouseDownContext.Provider value={{ MouseDown: isMouseDown, prev: prevNode, s: start, f: finish }}>
+                <mouseDownContext.Provider value={{MouseDown: isMouseDown, prev: prevNode, s: start, f: finish}}>
                     <div id="draggable-field" >
                         {nodes}
                     </div>
@@ -292,22 +292,22 @@ function PathFindingVisualizer() {
                         <Button label="Random Walls" handleClick={generateWalls} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
-                        <Button label="Create Maze" handleClick={() => { createMaze(51, 48, 13, true); }} />
+                        <Button label="Create Maze" handleClick={() => {createMaze(51, 48, 13, true);}} />
                     </Box>
                     <Box pl={2} pr={2} display="flex" flexDirection="column" alignItems="center">
                         <ButtonAccent handleClick={() => {
                             if (activeAlgo.id === -1) {
-                                (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "2px solid red"
+                                (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "2px solid red";
                                 return;
                             }
-                            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none"
+                            (document.getElementsByClassName("pathfinding-algoOptions") as HTMLCollectionOf<HTMLElement>)[0].style.border = "none";
                             findThePath(start, finish, false);
                         }} type="error" label="Find the path!" />
                     </Box>
                 </div>
             </div>
         </Box>
-    )
+    );
 }
 
 export default React.memo(PathFindingVisualizer);
