@@ -1,5 +1,7 @@
 # EEs Visualizer
 
+Try this App here: [EEs Visualizer](https://ericechemane.github.io/EEs-Visualization-Tool/)
+
 ## Covered Path Finding Algorithms
 
 - Breadth First Search
