@@ -1,11 +1,12 @@
 # EEs Visualizer
 
-Try this App here: [EEs Visualizer](https://ericechemane.github.io/EEs-Visualization-Tool/)
+Try this App right here: [EEs Visualizer](https://ericechemane.github.io/EEs-Visualization-Tool/)
 
 ## Covered Path Finding Algorithms
 
 - Breadth First Search
 - Depth First Search
+- Dijkstra's Algorithm
 
 ## Covered Sorting Algorithms
 
