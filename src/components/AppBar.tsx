@@ -1,5 +1,5 @@
-import { Box, Grid } from '@material-ui/core';
-import { useState } from 'react';
+import {Box, Grid} from '@material-ui/core';
+import {useState} from 'react';
 
 import cire from '../assets/cire.jpg';
 
@@ -7,11 +7,11 @@ import ButtonText from './buttons/ButtonText';
 import Avatar from '@material-ui/core/Avatar';
 
 
-export default function AppBar(props: any) {
+export default function AppBar (props: any) {
 
    const [activeTab, set_activeTab] = useState(0);
 
-   function activeTabIndicator(n: number) {
+   function activeTabIndicator (n: number) {
       set_activeTab(n);
       props.handleChangeTab(n);
    }
@@ -58,5 +58,5 @@ export default function AppBar(props: any) {
             </Box>
          </Grid>
       </Grid>
-   )
+   );
 }
